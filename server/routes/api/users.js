@@ -12,3 +12,5 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// additional user routes
