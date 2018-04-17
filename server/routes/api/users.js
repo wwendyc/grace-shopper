@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const { User, Review } = require('../../db')
+const { adminsOnly, authUser } = require('./gatekeepers')
 module.exports = router
 
 // GET /api/users
 // Hm...should everyone really be able to get these...?
-router.get('/', async (req, res, next) => {
+
+router.get('/', adminsOnly, async (req, res, next) => {
   try {
     const users = await User.findAll()
     res.json(users)
@@ -13,28 +15,30 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authUser, async (req, res, next) => {
   try {
     const singleUser = await User.findOne({
       include: [{ model: Review }],
       where: { id: req.params.id }
     })
-    res.json(singleUser)
+    singleUser ? res.json(singleUser) : res.sendStatus(404)
   } catch (err) {
     next(err)
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.get('/non-admin', adminsOnly, async (req, res, next) => {
   try {
-    const newUser = await User.create(req.body)
-    res.status(201).send(newUser)
+    const nonAdmins = await User.findAll({
+      where: { isAdmin: false }
+    })
+    res.json(nonAdmins)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/admin', async (req, res, next) => {
+router.get('/admin', adminsOnly, async (req, res, next) => {
   try {
     const adminUsers = await User.findAll({
       where: { isAdmin: true }
@@ -45,12 +49,37 @@ router.get('/admin', async (req, res, next) => {
   }
 })
 
-router.get('/non-admin', async (req, res, next) => {
+router.post('/', adminsOnly, async (req, res, next) => {
   try {
-    const nonAdmins = await User.findAll({
-      where: { isAdmin: false }
+    const newUser = await User.create(req.body)
+    res.status(201).json(newUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id', adminsOnly, async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {id: req.params.id}
     })
-    res.json(nonAdmins)
+    if (user) {
+      const updatedUser = await User.update(req.body)
+      res.json(updatedUser)
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/', adminsOnly, async (req, res, next) => {
+  try {
+    const deleteUser = await User.destroy({
+      where: { id: req.params.id }
+    })
+    deleteUser ? res.sendStatus(204) : res.sendStatus(404)
   } catch (err) {
     next(err)
   }
