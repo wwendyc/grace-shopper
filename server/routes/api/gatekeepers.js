@@ -8,7 +8,7 @@ export const adminsOnly = (req, res, next) => {
 }
 
 export const authUser = (req, res, next) => {
-  if (!req.user.isAdmin && (user.id !== req.params.id)) {
+  if (!req.user.isAdmin || (user.id !== req.params.id)) {
     const err = new Error('You don\'t have permissions to view this page! :x')
     err.status = 401
     return next(err)
