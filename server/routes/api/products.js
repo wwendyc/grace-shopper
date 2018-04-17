@@ -79,12 +79,12 @@ router.get('/', async (req, res, next) => {
     if (allProducts.length > 0) res.json(allProducts)
     else res.status(404).send('No products found!')
   } catch (error) {
-    next(err)
+    next(error)
   }
 })
 
 router.use((req, res, next) => {
   const err = new Error('API route not found!')
   err.status = 404
-  next(err)
+  next(error)
 })
