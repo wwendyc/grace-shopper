@@ -4,7 +4,6 @@ const Product = require('./product')
 const Review = require('./review')
 const Category = require('./category')
 const Order = require('./order')
-const Review = require('./review')
 
 // associations go here!
 Product.belgonsTo(Category)
