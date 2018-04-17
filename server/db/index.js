@@ -6,7 +6,7 @@ const Category = require('./category')
 const Order = require('./order')
 
 // associations go here!
-Product.belgonsTo(Category)
+Product.belongsTo(Category)
 Category.hasMany(Product)
 Product.hasMany(Review)
 Review.belongsTo(Product)
