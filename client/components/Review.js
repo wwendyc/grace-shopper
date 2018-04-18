@@ -1,11 +1,13 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {addReview} from '../store'
 
 class Review extends React.Component {
   constructor(){
     super()
     this.state = {
-      reviews: '',
-      reviewText: ''
+      reviews: [],
+      review: ''
     }
   }
 
@@ -21,6 +23,11 @@ class Review extends React.Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.addReview(this.state);// a method passed down from parent
+  }
+
   render(){
     return (
       <div>
@@ -34,15 +41,20 @@ class Review extends React.Component {
               ))
             :
               <div>No reviews for this product yet</div>
-          } </ul> </div>
-          <div>
-            <textarea name="reviewText" onChange={this.handleChange} value={this.state.reviewText} />
-            <button>Add Review </button>
-            {/* <button onClick={() => this.props.addReview(this.state.reviewText)}>Add Review </button> */}
-          </div>
+        } </ul> </div>
+        <form onSubmit = {this.handleSubmit}>
+          <textarea name="review" onChange={this.handleChange} value={this.state.review} />
+          <button type= "submit" disabled = {!(this.state.review)}>Add Review </button>
+        </form>
       </div>
     )
   }
 }
 
-export default Review
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addReview: (review) => dispatch(addReview(review)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Review)

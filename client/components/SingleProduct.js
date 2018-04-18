@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReview: (reviewText) => dispatch(addReview(reviewText)),
+    // addReview: (reviewText) => dispatch(addReview(reviewText)),
   }
 }
 
