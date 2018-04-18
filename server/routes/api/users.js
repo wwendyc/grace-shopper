@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { User, Order, Review } = require('../../db')
-const { adminsOnly, authUser } = require('./gatekeepers')
+const { adminsOnly, authUser } = require('./gatekeeping')
 module.exports = router
 
 // GET /api/users
