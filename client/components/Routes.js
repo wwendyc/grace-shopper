@@ -5,12 +5,17 @@ import Welcome from './Welcome'
 import Home from './Home'
 import NoMatch from './NoMatch'
 
+import {UserDetail} from './User/UserDetail'
+import {EditUserForm} from './User/EditUserForm'
+
 const Routes = () => (
   <div className='fill-xy center-xy column'>
     <Switch>
       <Route exact path='/' component={Welcome} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
+      <Route path='/user/:userId' component={UserDetail} />
+      <Route path='/user/:userId/edit' component={EditUserForm} />
       <AuthRoute path='/home' component={Home} />
       <Route component={NoMatch} />
     </Switch>
