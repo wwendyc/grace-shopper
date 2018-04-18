@@ -18,16 +18,17 @@ const selectProductAction = product => ({
   product
 })
 
-export const getProducts = async (dispatch) => {
-  const res = await axios.get('/api/products')
-  const products = res.data
-  dispatch(getProductsAction(products))
+export const getProducts = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/products')
+    const products = res.data
+    dispatch(getProductsAction(products))   
+  } catch (error) { console.log(error) }
 }
 
-export const selectProduct = (dispatch, product) => {
+export const selectProduct = (product) => (dispatch) => {
   dispatch(selectProductAction(product))
 }
-
 
 export default (state = initialState, action) => {
   switch(action.type) {
