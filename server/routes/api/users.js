@@ -1,14 +1,14 @@
 const router = require('express').Router()
-const { User, Review } = require('../../db')
-const { adminsOnly, authUser } = require('./gatekeepers')
+const { User, Order, Review } = require('../../db')
+const { adminsOnly, authUser } = require('./gatekeeping')
 module.exports = router
 
 // GET /api/users
-// Hm...should everyone really be able to get these...?
-
 router.get('/', adminsOnly, async (req, res, next) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({
+      include: [{ model: Order }]
+    })
     res.json(users)
   } catch (err) {
     next(err)
@@ -49,6 +49,7 @@ router.get('/admin', adminsOnly, async (req, res, next) => {
   }
 })
 
+// Create user
 router.post('/', adminsOnly, async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
@@ -58,10 +59,11 @@ router.post('/', adminsOnly, async (req, res, next) => {
   }
 })
 
+// Update user
 router.put('/:id', adminsOnly, async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: {id: req.params.id}
+      where: { id: req.params.id }
     })
     if (user) {
       const updatedUser = await User.update(req.body)
@@ -74,6 +76,7 @@ router.put('/:id', adminsOnly, async (req, res, next) => {
   }
 })
 
+// Delete user
 router.delete('/', adminsOnly, async (req, res, next) => {
   try {
     const deleteUser = await User.destroy({
