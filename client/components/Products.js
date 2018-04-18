@@ -1,27 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
-class Products extends Component {
-  constructor() {
-    super()
-    this.state = {
-      products: []
-    }
-  }
 
-  async componentDidMount() {
-    const res = await axios.get('/api/products')
-    const products = res.data
-    this.setState({
-      products
-    })
-    console.log(this.state)
-  }
+const Products = () => {
 
-  render() {
-    const products = this.state.products
-    return (
-      <div id='ProductsContainer'>
+  const products = []
+
+  return (
+    <div id='ProductsContainer'>
       {
         products.map(product => {
           return (
@@ -34,16 +21,26 @@ class Products extends Component {
                   <li>Name: {product.name}</li>
                   <li>Description: {product.description}</li>
                   <li>Price: ${product.price}</li>
-                  <li>Quantity in stock: {product.inventory.Quantity}
+                  <li>Quantity in stock: {product.inventoryQuantity}</li>
                 </ul>
               </div>
             </div>
           )
         })
       }
-      </div>
-    )
+    </div>
+  )
+}
+
+const mapState = state => {
+  return {
+    products: state.product.products
   }
 }
+
+const mapDispatch = dispatch => {
+
+}
+
 
 export default Products
