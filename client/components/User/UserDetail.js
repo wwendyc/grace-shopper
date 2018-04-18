@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {EditUserForm} from './EditUserForm'
+import {UserForm} from './UserForm'
 // need to import Order component
 
 class UserDetail extends Component {
@@ -13,6 +13,7 @@ class UserDetail extends Component {
         <h1>{name}</h1>
         <h5>{email}</h5>
         <h5>Password</h5>
+        {/* pass the user data down to the form */}
         <Link to={`/user/${id}/edit`}><button>Edit</button></Link>
         <h3>Order history:</h3>
         <ul>
