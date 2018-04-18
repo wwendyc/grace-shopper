@@ -43,7 +43,6 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getProducts: dispatch(getProducts),
-    selectProdu
   }
 }
 
