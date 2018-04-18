@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('./database')
 
 const Order = db.define('order', {
-  items: {
+  products: {
     type: Sequelize.ARRAY(Sequelize.JSON),
     allowNull: false
   },
@@ -17,6 +17,12 @@ const Order = db.define('order', {
       'Completed'
     ),
     allowNull: false
+  },
+  checkoutDate: {
+    type: Sequelize.DATE
+  },
+  totalPrice: {
+    type: Sequelize.FLOAT
   }
 })
 

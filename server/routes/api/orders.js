@@ -54,7 +54,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    await req.campus.destroy();
+    await req.order.destroy();
 
     res.sendStatus(204);
   } catch (err) {
