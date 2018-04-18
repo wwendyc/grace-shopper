@@ -3,32 +3,32 @@ import { connect } from 'react-redux'
 
 // import ProductListing from './ProductListing'
 
-class Order extends Component {
+class SingleOrder extends Component {
   constructor () {
     super()
   }
 
   render () {
-    // const { currentOrder } = this.props
-    const currentOrder = {
+    const { currentOrder } = this.props
+    const selectedOrder = {
       id: 1,
       status: 'Created',
       checkoutDate: '04/28/2018',
-      totalPrice: 50.25,
+      totalPrice: (50.20).toFixed(2),
       products: [
         {
           id: 1,
           name: 'item1',
           imgUrl: '',
           quantity: 2,
-          price: 2.00
+          price: 2.50
         },
         {
           id: 2,
           name: 'item2',
           imgUrl: '',
           quantity: 1,
-          price: 3.00
+          price: 3.75
         },
       ]
     }
@@ -36,14 +36,18 @@ class Order extends Component {
     return (
       <div>
         <div>
-          <h1>Order ID: {currentOrder.id}</h1>
-          <h1>Status: {currentOrder.status}</h1>
-          <h3>Checkout Date: {currentOrder.checkoutDate}</h3>
-          <h3>Total: ${currentOrder.totalPrice}</h3>
+          <div>
+            <h1>Order ID: {selectedOrder.id}</h1>
+            <h2>Status: {selectedOrder.status}</h2>
+          </div>
+          <div>
+            <h3>Checkout Date: {selectedOrder.checkoutDate}</h3>
+            <h3>Total: ${selectedOrder.totalPrice}</h3>
+          </div>
         </div>
         <div>
         {
-          currentOrder.products.map(product => {
+          selectedOrder.products.map(product => {
             return (
               <div key={product.id}>
                 {/* <ProductListing product={product} /> */}
@@ -64,12 +68,12 @@ class Order extends Component {
 }
 
 // const mapStateToProps = (state) => ({
-//   currentOrder: state.currentOrder
+//   selectedOrder: state.selectedOrder
 // })
 
 // const mapDispatchToProps = (dispatch) => ({
 
 // })
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Order)
-export default Order
+// export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)
+export default SingleOrder
