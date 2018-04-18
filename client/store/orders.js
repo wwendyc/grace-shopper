@@ -5,7 +5,7 @@ const GET_ORDERS = 'GET_ORDERS'
 const ADD_ORDER = 'ADD_ORDER'
 const UPDATE_ORDER = 'UPDATE_ORDER'
 const REMOVE_ORDER = 'REMOVE_ORDER'
-const SELECT_ORDER = 'SELECT_ORDER'
+const SET_ORDER = 'SET_ORDER'
 
 /**
  * INITIAL STATE
@@ -38,8 +38,8 @@ const remove = (orderId) => ({
   orderId
 })
 
-const select = (order) => ({
-  type: SELECT_ORDER,
+export const setOrder = (order) => ({
+  type: SET_ORDER,
   order
 })
 
@@ -100,20 +100,6 @@ export const removeOrder = (orderId) => {
   }
 }
 
-export const selectOrder = (orderId) => {
-  return async (dispatch, getState, { axios, history }) => {
-    try {
-      const { data } = await axios.get(`/api/orders/${orderId}`);
-      dispatch(select(data));
-
-      history.push(`/orders/${orderId}`)
-    }
-    catch (error) {
-      console.error(`Attempt to select order with id ${orderId} has failed`, error);
-    }
-  }
-}
-
 /**
  * REDUCER
  */
@@ -160,7 +146,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case SELECT_ORDER:
+    case SET_ORDER:
       return {
         ...state,
         selected: action.order
