@@ -4,6 +4,7 @@ import {AuthRoute, Login, Signup} from './auth'
 import Welcome from './Welcome'
 import Home from './Home'
 import NoMatch from './NoMatch'
+import SingleProduct from './SingleProduct'
 
 import {UserDetail} from './User/UserDetail'
 import {EditUserForm} from './User/EditUserForm'
@@ -17,6 +18,7 @@ const Routes = () => (
       <Route path='/user/:userId' component={UserDetail} />
       <Route path='/user/:userId/edit' component={EditUserForm} />
       <AuthRoute path='/home' component={Home} />
+      <Route path='/single-product' component={SingleProduct} />
       <Route component={NoMatch} />
     </Switch>
   </div>
