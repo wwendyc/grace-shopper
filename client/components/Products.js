@@ -6,14 +6,14 @@ import { getProducts, selectProduct } from '../store/product'
 
 const Products = (props) => {
 
-  const products = props.products
+  const  {products, selectProduct} = props
 
   return (
     <div id='ProductsContainer'>
       {
         products.map(product => {
           return (
-            <div key={product.id}>
+            <div key={product.id} onClick={() => selectProduct(product)}>
               <div className='ImgContainer'>
                 <img src={product.imgUrl} />
               </div>
@@ -42,9 +42,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProducts: dispatch(getProducts),
+    getProducts: dispatch(getProducts()),
+    selectProduct: (product) => dispatch(selectProduct(product))
   }
 }
-
 
 export default connect(mapState, mapDispatch)(Products)
