@@ -18,9 +18,21 @@ router.param('id', async (req, res, next, id) => {
   }
 });
 
+// TODO: need gatekeeping
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await Order.findAll()
+    let orders = []
+
+    if (req.user.isAdmin) {
+      orders = await Order.findAll()
+    }
+    else {
+      orders = await Order.findAll({
+        where: {
+          id: req.user.id
+        }
+      })
+    }
 
     res.json(orders)
   } catch (err) {
