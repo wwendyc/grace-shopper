@@ -84,7 +84,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.use((req, res, next) => {
-  const err = new Error('API route not found!')
-  err.status = 404
+  const error = new Error('API route not found!')
+  error.status = 404
   next(error)
 })
