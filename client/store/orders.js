@@ -117,23 +117,23 @@ export const selectOrder = (orderId) => {
 /**
  * REDUCER
  */
-export default (orders = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS:
       return {
-        ...orders,
+        ...state,
         list: action.orders
       }
 
     case ADD_ORDER:
       return {
-        ...orders,
-        list: [...orders.list, action.order],
+        ...state,
+        list: [...state.list, action.order],
         selected: action.order
       }
 
     case UPDATE_ORDER: {
-      const list = orders.list.map(order => {
+      const list = state.list.map(order => {
         if (order.id === action.order.id) {
           return action.order
         }
@@ -142,19 +142,19 @@ export default (orders = initialState, action) => {
       })
 
       return {
-        ...orders,
+        ...state,
         list,
         selected: action.order
       }
     }
 
     case REMOVE_ORDER: {
-      const list = orders.list.filter(order => {
+      const list = state.list.filter(order => {
         return order.id !== action.orderId
       })
 
       return {
-        ...orders,
+        ...state,
         list,
         selected: {}
       }
@@ -162,11 +162,11 @@ export default (orders = initialState, action) => {
 
     case SELECT_ORDER:
       return {
-        ...orders,
+        ...state,
         selected: action.order
       }
 
     default:
-      return orders
+      return state
   }
 }

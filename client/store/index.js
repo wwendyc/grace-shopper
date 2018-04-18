@@ -5,8 +5,9 @@ import axios from 'axios'
 import history from '../history'
 import user from './user'
 import product from './product'
+import orders from './orders'
 
-const reducer = combineReducers({user, product})
+const reducer = combineReducers({user, product, orders})
 
 const store = createStore(
   reducer,
@@ -19,3 +20,4 @@ const store = createStore(
 export default store
 export * from './user'
 export * from './product'
+export * from './orders'
