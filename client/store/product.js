@@ -18,12 +18,13 @@ const selectProductAction = product => ({
   product
 })
 
-export const getProducts = async () => {
-  const products = await axios.get('/api/products')
+export const getProducts = async (dispatch) => {
+  const res = await axios.get('/api/products')
+  const products = res.data
   dispatch(getProductsAction(products))
 }
 
-export const selectProduct = product => {
+export const selectProduct = (dispatch, product) => {
   dispatch(selectProductAction(product))
 }
 

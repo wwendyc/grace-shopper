@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { getProducts, selectProduct } from '../store/product'
 
 
-const Products = () => {
+const Products = (props) => {
 
-  const products = []
+  const products = props.products
 
   return (
     <div id='ProductsContainer'>
@@ -34,13 +35,17 @@ const Products = () => {
 
 const mapState = state => {
   return {
-    products: state.product.products
+    products: state.product.products,
+    selectedProduct: state.product.selectedProduct
   }
 }
 
 const mapDispatch = dispatch => {
-
+  return {
+    getProducts: dispatch(getProducts),
+    selectProdu
+  }
 }
 
 
-export default Products
+export default connect(mapState, mapDispatch)(Products)
