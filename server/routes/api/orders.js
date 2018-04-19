@@ -24,13 +24,20 @@ router.get('/', async (req, res, next) => {
     let orders = []
 
     // if (req.user.isAdmin) {
-      orders = await Order.findAll()
+      orders = await Order.findAll({
+        order: [
+          ['checkoutDate', 'DESC']
+        ]
+      })
     // }
     // else {
     //   orders = await Order.findAll({
     //     where: {
     //       id: req.user.id
-    //     }
+    //     },
+    //     order: [
+    //       ['checkoutDate', 'DESC']
+    //     ]
     //   })
     // }
 
