@@ -62,11 +62,11 @@ router.post('/', adminsOnly, async (req, res, next) => {
 // Update user
 router.put('/:id', adminsOnly, async (req, res, next) => {
   try {
-    const user = await User.findOne({
+    const targetUser = await User.findOne({
       where: { id: req.params.id }
     })
-    if (user) {
-      const updatedUser = await User.update(req.body)
+    if (targetUser) {
+      const updatedUser = await targetUser.update(req.body)
       res.json(updatedUser)
     } else {
       res.sendStatus(404)
@@ -77,7 +77,7 @@ router.put('/:id', adminsOnly, async (req, res, next) => {
 })
 
 // Delete user
-router.delete('/', adminsOnly, async (req, res, next) => {
+router.delete('/:id', adminsOnly, async (req, res, next) => {
   try {
     const deleteUser = await User.destroy({
       where: { id: req.params.id }
