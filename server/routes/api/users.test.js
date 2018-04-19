@@ -4,9 +4,10 @@ const {expect} = require('chai')
 const request = require('supertest')
 const {db, User} = require('../../db')
 const app = require('../../app')
+const session = require('supertest-session')
 
 describe('User routes', () => {
-  let authenticatedUser
+  let testSession = null
 
   beforeEach(async () => {
     await db.sync({force: true})
@@ -18,22 +19,23 @@ describe('User routes', () => {
     const codysPwd = '123'
 
     beforeEach(async () => {
-      const authUser = await User.create({
+      await User.create({
         name: codysName,
         email: codysEmail,
         password: codysPwd,
         isAdmin: true
       })
 
-      authenticatedUser = request(app)
+      testSession = session(app)
 
-      await authenticatedUser
-          .post('/login')
-          .send({email: authUser.email, password: authUser.password})
+      return testSession
+        .put('/auth/local')
+        .send({email: codysEmail, password: codysPwd})
+        .expect(200)
     })
 
     it('GET /api/users', async () => {
-      return authenticatedUser
+      return testSession
         .get('/api/users')
         .expect(200)
         .then(res => {
@@ -43,7 +45,7 @@ describe('User routes', () => {
     })
 
     it('POST /api/users', async () => {
-      return authenticatedUser
+      return testSession
         .post('/api/users')
         .send({
           name: 'Tweety',
@@ -64,7 +66,7 @@ describe('User routes', () => {
         password: 'yellowSubmarine'
       })
 
-      return authenticatedUser
+      return testSession
         .put(`/api/users/${user.id}`)
         .send({
           name: 'Grace'

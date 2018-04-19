@@ -1,6 +1,7 @@
 /**
  * ACTION TYPES
  */
+const GET_ALL_USERS = 'GET_ALL_USERS'
 const ADD_USER = 'ADD_USER'
 const EDIT_USER = 'EDIT_USER'
 
@@ -12,6 +13,7 @@ const usersList = []
 /**
  * ACTION CREATORS
  */
+const allUsers = () => ({type: GET_ALL_USERS, users})
 const addUser = user => ({type: ADD_USER, user})
 const editUser = (user, userId) => ({type: EDIT_USER, userId, user})
 
@@ -40,7 +42,7 @@ export const updateUser = (userId, user) => {
 export default (state = usersList, action) => {
   switch (action.type) {
   case GET_ALL_USERS:
-    return action.user
+    return state.usersList
   case ADD_USER:
   case EDIT_USER:
   case REMOVE_USER:
