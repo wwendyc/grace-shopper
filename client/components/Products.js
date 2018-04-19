@@ -36,14 +36,17 @@ const Products = (props) => {
 const mapState = state => {
   return {
     products: state.product.products,
-    // selectedProduct: state.product.selectedProduct - not needed in this component
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     getProducts: dispatch(getProducts()),
-    setProduct: (product) => dispatch(setProduct(product))
+    setProduct: (product) => {
+      event.preventDefault()
+      dispatch(setProduct(product))
+      ownProps.history.push('/single-product')
+    }
   }
 }
 
