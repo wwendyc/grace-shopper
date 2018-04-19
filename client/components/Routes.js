@@ -5,6 +5,7 @@ import Products from './Products'
 import Home from './Home'
 import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
+import Orders from './Orders'
 import UserDetail from './User/UserDetail'
 import UserForm from './User/UserForm'
 
@@ -14,6 +15,7 @@ const Routes = () => (
       <AuthRoute path="/home" component={Home} />
       <Route exact path="/" component={Products} />
       <Route path="/single-product" component={SingleProduct} />
+      <Route path="/orders" component={Orders} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/user/:userId" component={UserDetail} />
