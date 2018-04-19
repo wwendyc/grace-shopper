@@ -14,19 +14,21 @@ const getProductsAction = products => ({
   products
 })
 
-const selectProductAction = product => ({
+const setProductAction = product => ({
   type: SELECT_PRODUCT,
   product
 })
 
-export const getProducts = async (dispatch) => {
-  const res = await axios.get('/api/products')
-  const products = res.data
-  dispatch(getProductsAction(products))
+export const getProducts = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/products')
+    const products = res.data
+    dispatch(getProductsAction(products))
+  } catch (error) { console.log(error) } // redirect to error page instead of just console logging.
 }
 
-export const selectProduct = (dispatch, product) => {
-  dispatch(selectProductAction(product))
+export const setProduct = (product) => (dispatch) => {
+  dispatch(setProductAction(product))
 }
 const addedReview = (review) => {
   return ({
@@ -35,13 +37,6 @@ const addedReview = (review) => {
   })
 }
 
-export const addReview = (review) => {
-  return async (dispatch) => {
-    const response = await axios.post('api/reviews/', review )
-    console.log(response.data)
-    dispatch(addedReview(response.data))
-  }
-}
 export default (state = initialState, action) => {
   switch (action.type) {
   case GET_PRODUCTS:

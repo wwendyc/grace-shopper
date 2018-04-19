@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { getProducts, selectProduct } from '../store/product'
+import { getProducts, setProduct } from '../store/product'
 
 
 const Products = (props) => {
 
-  const products = props.products
+  const  {products, setProduct} = props
 
   return (
     <div id='ProductsContainer'>
       {
         products.map(product => {
           return (
-            <div key={product.id}>
+            <div key={product.id} onClick={() => setProduct(product)}>
               <div className='ImgContainer'>
                 <img src={product.imgUrl} />
               </div>
@@ -36,15 +36,15 @@ const Products = (props) => {
 const mapState = state => {
   return {
     products: state.product.products,
-    selectedProduct: state.product.selectedProduct
+    // selectedProduct: state.product.selectedProduct - not needed in this component
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getProducts: dispatch(getProducts),
+    getProducts: dispatch(getProducts()),
+    setProduct: (product) => dispatch(setProduct(product))
   }
 }
-
 
 export default connect(mapState, mapDispatch)(Products)

@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('./database')
 
+// Think about what all is being stored into the products list
+
 const Order = db.define('order', {
   products: {
     type: Sequelize.ARRAY(Sequelize.JSON),

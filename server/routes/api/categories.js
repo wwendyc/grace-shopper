@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const Category = require('../../db/category')
 
+// send back confirmation on product being deleted instead of sending back the deleted product
+// and correct status code
+
 router.param('id', async (req, res, next, id) => {
   try {
     const category = await Category.findById(id)

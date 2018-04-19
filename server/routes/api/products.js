@@ -4,6 +4,9 @@ module.exports = router
 
 // api/products
 
+// send back confirmation on product being deleted instead of sending back the deleted product
+// and correct status code
+
 router.get('/category/:category', async (req, res, next) => {
   try {
     const category = req.params.category
