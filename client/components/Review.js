@@ -6,15 +6,8 @@ class Review extends React.Component {
   constructor(){
     super()
     this.state = {
-      reviews: [],
       review: ''
     }
-  }
-
-  componentWillReceiveProps = (props) => {
-    this.setState({
-      reviews: props.reviews
-    });
   }
 
   handleChange = (event) => {
@@ -25,16 +18,38 @@ class Review extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addReview(this.state);// a method passed down from parent
+    // this.props.addReview(this.state);
   }
 
   render(){
+    // const reviews =  this.state.product.selectedProduct.reviews || []
+    const reviews = [{
+      review: 'excellent',
+      rating: 4
+    },
+    {
+      review: 'OutStanding',
+      rating: 5
+    }]
     return (
       <div>
-        <div>Reviews for Product:<ul> {
-            (this.state.reviews.length)
+
+        {/* <div>Reviews for Product:<ul> {
+            (this.props.state.product.selectedProduct.reviews.length)
             ?
-            this.state.reviews.map(review => (
+            this.props.state.product.selectedProduct.reviews.map(review => (
+              <li key= {review.id}>
+                Rated: {review.rating} {review.review}
+              </li>
+              ))
+            :
+              <div>No reviews for this product yet</div>
+        } </ul> </div> */}
+
+        <div>Reviews for Product:<ul> {
+            (reviews.length)
+            ?
+            reviews.map(review => (
               <li key= {review.id}>
                 Rated: {review.rating} {review.review}
               </li>
@@ -42,6 +57,7 @@ class Review extends React.Component {
             :
               <div>No reviews for this product yet</div>
         } </ul> </div>
+
         <form onSubmit = {this.handleSubmit}>
           <textarea name="review" onChange={this.handleChange} value={this.state.review} />
           <button type= "submit" disabled = {!(this.state.review)}>Add Review </button>
@@ -51,10 +67,16 @@ class Review extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    addReview: (review) => dispatch(addReview(review)),
+    state: state
   }
 }
 
-export default connect(null, mapDispatchToProps)(Review)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // addReview: (review) => dispatch(addReview(review)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Review)

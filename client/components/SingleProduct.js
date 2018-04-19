@@ -6,42 +6,43 @@ class SingleProduct extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentProduct: {},
       quantity: 0
     }
   }
 
-  componentDidMount() {
+  handleChange = (event) => {
     this.setState({
-      currentProduct: {
-        id: 1,
-        name: "Sully's thunder roar",
-        description: 'BootCamp it is!!!',
-        price: 100,
-        imgUrl: '',
-        reviews: [{
-          review: 'excellent',
-          rating: 4
-        },
-        {
-          review: 'OutStanding',
-          rating: 5
-        }],
-        category: {
-          name: 'Remote'
-        }
-      },
-      quantity: 0
+      [event.target.name]: event.target.value
     })
   }
 
 
-
   render(){
-    const product =  this.state.currentProduct || {};
-    const category = this.state.currentProduct.category || ''
-    const reviews = this.state.currentProduct.reviews || []
-    console.log(reviews)
+    const selectedProduct = {
+      id: 1,
+      name: "Sully's thunder roar",
+      description: 'BootCamp it is!!!',
+      price: 100,
+      imgUrl: '',
+      reviews: [{
+        review: 'excellent',
+        rating: 4
+      },
+      {
+        review: 'OutStanding',
+        rating: 5
+      }],
+      category: {
+        name: 'Remote'
+      }
+    }
+    // const product =  this.props.selectedProduct || {};
+    // const category = this.props.selectedProduct.category || ''
+    // const reviews = this.props.selectedProduct.reviews || []
+    const product =  selectedProduct || {};
+    const category = selectedProduct.category || ''
+    const reviews = selectedProduct.reviews || []
+    // console.log(reviews)
     return (
       <div>
         <div> Product Name: {product.name}</div>
@@ -69,13 +70,13 @@ class SingleProduct extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state
+    selectedProduct: state.product.selectedProduct
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // addReview: (reviewText) => dispatch(addReview(reviewText)),
+    // addToCart: (product) => dispatch(addToCart(product)),
   }
 }
 
