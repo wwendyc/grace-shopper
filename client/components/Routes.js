@@ -7,7 +7,11 @@ import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
 
 import { UserDetail } from './User/UserDetail'
+<<<<<<< HEAD
 // import { EditUserForm } from './User/EditUserForm'
+=======
+import { UserForm } from './User/UserForm'
+>>>>>>> master
 
 const Routes = () => (
   <div className="fill-xy center-xy column">
@@ -18,7 +22,11 @@ const Routes = () => (
       <Route path="/single-product" component={SingleProduct} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
+<<<<<<< HEAD
       {/* <Route path="/user/:userId/edit" component={EditUserForm} /> */}
+=======
+      <Route path="/user/:userId/edit" component={UserForm} />
+>>>>>>> master
       <Route component={NoMatch} />
     </Switch>
   </div>
