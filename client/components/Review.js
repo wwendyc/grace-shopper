@@ -1,18 +1,13 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {addReview} from '../store/product'
 
 class Review extends React.Component {
   constructor(){
     super()
     this.state = {
-      reviews: '',
-      reviewText: ''
+      review: ''
     }
-  }
-
-  componentWillReceiveProps = (props) => {
-    this.setState({
-      reviews: props.reviews
-    });
   }
 
   handleChange = (event) => {
@@ -21,28 +16,48 @@ class Review extends React.Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.addReview(this.state);
+  }
+
   render(){
+    const reviews =  this.props.selectedProduct.reviews || []
+
     return (
       <div>
+
         <div>Reviews for Product:<ul> {
-            (this.state.reviews.length)
+            (reviews.length)
             ?
-            this.state.reviews.map(review => (
+            reviews.map(review => (
               <li key= {review.id}>
                 Rated: {review.rating} {review.review}
               </li>
               ))
             :
               <div>No reviews for this product yet</div>
-          } </ul> </div>
-          <div>
-            <textarea name="reviewText" onChange={this.handleChange} value={this.state.reviewText} />
-            <button>Add Review </button>
-            {/* <button onClick={() => this.props.addReview(this.state.reviewText)}>Add Review </button> */}
-          </div>
+        } </ul> </div>
+
+        <form onSubmit = {this.handleSubmit}>
+          <textarea name="review" onChange={this.handleChange} value={this.state.review} />
+          <button type= "submit" disabled = {!(this.state.review)}>Add Review </button>
+        </form>
       </div>
     )
   }
 }
 
-export default Review
+const mapStateToProps = (state) => {
+  return {
+    selectedProduct: state.product.selectedProduct
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addReview: (review) => dispatch(addReview(review)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Review)
