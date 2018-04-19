@@ -18,5 +18,3 @@ const store = createStore(
 )
 
 export default store
-export * from './user'
-export * from './product'
