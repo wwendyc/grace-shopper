@@ -9,7 +9,7 @@ import UserDetail from './User/UserDetail'
 import UserForm from './User/UserForm'
 
 const Routes = () => (
-  <div className="fill-xy center-xy column">
+  <div id="ComponentContainer" className="fill-xy center-xy column">
     <Switch>
       <AuthRoute path="/home" component={Home} />
       <Route exact path="/" component={Products} />
