@@ -35,3 +35,33 @@ nav a:first-child:hover {
   width: 40px;
   border-radius: 50%;
 }
+
+#ComponentContainer {
+  height: 100%;
+  width: 100%
+}
+
+#ProductsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+}
+
+li {
+  width: 300px;
+}
+
+.ImgContainer {
+  margin: 50px;
+  margin-top: 10px;
+}
+
+.ProductContainer {
+  margin: 50px;
+  margin-top: 0px;
+}
