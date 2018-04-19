@@ -2,25 +2,25 @@ import axios from 'axios'
 
 const initialState = {
   products: [],
-  // selectedProduct: {}
-  selectedProduct: {
-    id: 1,
-    name: "Sully's thunder roar",
-    description: 'BootCamp it is!!!',
-    price: 100,
-    imgUrl: '',
-    reviews: [{
-      review: 'excellent',
-      rating: 4
-    },
-    {
-      review: 'OutStanding',
-      rating: 5
-    }],
-    categories: [{
-      name: 'Remote'
-    }]
-  }
+  selectedProduct: {}
+  // selectedProduct: {
+  //   id: 1,
+  //   name: "Sully's thunder roar",
+  //   description: 'BootCamp it is!!!',
+  //   price: 100,
+  //   imgUrl: '',
+  //   reviews: [{
+  //     review: 'excellent',
+  //     rating: 4
+  //   },
+  //   {
+  //     review: 'OutStanding',
+  //     rating: 5
+  //   }],
+  //   categories: [{
+  //     name: 'Remote'
+  //   }]
+  // }
 }
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
@@ -48,6 +48,7 @@ export const getProducts = () => async (dispatch) => {
 export const setProduct = (product) => (dispatch) => {
   dispatch(setProductAction(product))
 }
+
 const addedReview = (review) => {
   return ({
     type: ADDED_REVIEW,
@@ -56,6 +57,7 @@ const addedReview = (review) => {
 }
 
 export const addReview = (review) => {
+  console.log("at review")
   return async (dispatch) => {
     const response = await axios.post('api/reviews/', review )
     console.log(response.data)

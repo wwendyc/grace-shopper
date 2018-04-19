@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addReview} from '../store'
+import {addReview} from '../store/product'
 
 class Review extends React.Component {
   constructor(){
@@ -23,14 +23,7 @@ class Review extends React.Component {
 
   render(){
     const reviews =  this.props.selectedProduct.reviews || []
-    // const reviews = [{
-    //   review: 'excellent',
-    //   rating: 4
-    // },
-    // {
-    //   review: 'OutStanding',
-    //   rating: 5
-    // }]
+
     return (
       <div>
 

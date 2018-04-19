@@ -16,8 +16,10 @@ describe('User routes', () => {
 
     beforeEach(async () => {
       await User.create({
+        name: 'cody',
         email: codysEmail,
-        password: codysPwd
+        password: codysPwd,
+        isAdmin: true
       })
     })
 
