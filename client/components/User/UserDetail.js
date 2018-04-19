@@ -7,20 +7,11 @@ import {UserForm} from './UserForm'
 
 class UserDetail extends Component {
   render() {
-    const { id, name, email, orders } = this.props
+    // const { id, name, email, orders } = this.props
     return (
       <div>
-        <h1>{name}</h1>
-        <h5>{email}</h5>
-        <h5>Password</h5>
-        {/* pass the user data down to the form */}
-        <Link to={`/user/${id}/edit`}><button>Edit</button></Link>
-        <h3>Order history:</h3>
-        <ul>
-          orders.map(order => (
-            {/* <Orders key={order.id} {...order} /> */}
-          ))
-        </ul>
+        <h1>Hello!</h1>
+
       </div>
     )
   }

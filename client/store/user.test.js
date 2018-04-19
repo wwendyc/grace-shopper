@@ -13,7 +13,7 @@ const mockAxios = new MockAdapter(axios)
 const middlewares = [thunks.withExtraArgument({axios, history})]
 const mockStore = configureMockStore(middlewares)
 
-describe('thunk creators', () => {
+describe('auth thunk creators', () => {
   let store
   const initialState = {user: {}}
 
@@ -42,4 +42,8 @@ describe('thunk creators', () => {
       expect(history.location.pathname).to.be.equal('/')
     })
   })
+})
+
+describe('user thunk creators', () => {
+
 })

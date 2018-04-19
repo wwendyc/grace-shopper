@@ -5,19 +5,18 @@ import Products from './Products'
 import Home from './Home'
 import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
-
-import { UserDetail } from './User/UserDetail'
-import { UserForm } from './User/UserForm'
+import UserDetail from './User/UserDetail'
+import UserForm from './User/UserForm'
 
 const Routes = () => (
   <div className="fill-xy center-xy column">
     <Switch>
-      <Route path="/user/:userId" component={UserDetail} />
       <AuthRoute path="/home" component={Home} />
-      <Route exact path='/' component={Products} />
+      <Route exact path="/" component={Products} />
       <Route path="/single-product" component={SingleProduct} />
-      <Route path='/login' component={Login} />
-      <Route path='/signup' component={Signup} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/user/:userId" component={UserDetail} />
       <Route path="/user/:userId/edit" component={UserForm} />
       <Route component={NoMatch} />
     </Switch>
