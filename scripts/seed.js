@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {db, User} = require('../server/db')
+const {db, User, Product, Review, Order, Category} = require('../server/db')
 
 const seed = async () => {
   await db.sync({force: true})
@@ -25,23 +25,80 @@ const seed = async () => {
 
   console.log(`seeded ${products.length} products`)
 
-  // const reviews = await Promise.all([
-  //   Review.create({})
-  // ])
+  const reviews = await Promise.all([
+    Review.create({review: 'Best scaring class I\'ve ever taken!!', rating: 5 }),
+    Review.create({review: 'I\'d give this course 10 stars if I could!', rating: 5 }),
+    Review.create({review: 'Seriously, take this class!', rating: 5 }),
+    Review.create({review: 'Thanks to these lessons, I feel like I can scare anyone!', rating: 4 }),
+    Review.create({review: 'Loved the class but oops wrong rating.', rating: 1 })
+  ])
 
-  // console.log(`seeded ${reviews.length} reviews`)
+  console.log(`seeded ${reviews.length} reviews`)
 
-  // const orders = await Promise.all([
-  //   Order.create({})
-  // ])
+  const orders = await Promise.all([
+    Order.create({
+      "id": 1,
+      "products": [
+      {
+      "id": 1,
+      "name": "item",
+      "imgUrl": "",
+      "quantity": 2,
+      "price": 150
+      },
+      {
+      "id": 2,
+      "name": "item2",
+      "imgUrl": "",
+      "quantity": 3,
+      "price": 101.75
+      }
+      ],
+      "address": "123 fake st",
+      "status": "Created",
+      "checkoutDate": "2018-04-18T04:00:00.000Z",
+      "totalPrice": 200,
+      "createdAt": "2018-04-18T16:20:08.421Z",
+      "updatedAt": "2018-04-18T16:20:08.421Z",
+      "userId": 1
+      }),
+    Order.create({
+      "id": 2,
+      "products": [
+      {
+      "id": 3,
+      "name": "item3",
+      "imgUrl": "",
+      "quantity": 2,
+      "price": 230.50
+      },
+      {
+      "id": 4,
+      "name": "item4",
+      "imgUrl": "",
+      "quantity": 3,
+      "price": 375
+      }
+      ],
+      "address": "123 fake st",
+      "status": "Created",
+      "checkoutDate": "2018-04-18T04:00:00.000Z",
+      "totalPrice": 130.12,
+      "createdAt": "2018-04-18T16:24:52.100Z",
+      "updatedAt": "2018-04-18T16:24:52.100Z",
+      "userId": 1
+      })
+  ])
 
-  // console.log(`seeded ${orders.length} orders`)
+  console.log(`seeded ${orders.length} orders`)
 
-  // const categories = await Promise.all([
-  //   Category.create({})
-  // ])
+  const categories = await Promise.all([
+    Category.create({name: 'scaring tactics'}),
+    Category.create({name: 'thunder roar'}),
+    Category.create({name: 'lessons'})
+  ])
 
-  // console.log(`seeded ${categories.length} categories`)
+  console.log(`seeded ${categories.length} categories`)
 
   console.log(`seeded all data successfully`)
 }
