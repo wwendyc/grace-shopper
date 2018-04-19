@@ -23,16 +23,16 @@ router.get('/', async (req, res, next) => {
   try {
     let orders = []
 
-    if (req.user.isAdmin) {
+    // if (req.user.isAdmin) {
       orders = await Order.findAll()
-    }
-    else {
-      orders = await Order.findAll({
-        where: {
-          id: req.user.id
-        }
-      })
-    }
+    // }
+    // else {
+    //   orders = await Order.findAll({
+    //     where: {
+    //       id: req.user.id
+    //     }
+    //   })
+    // }
 
     res.json(orders)
   } catch (err) {

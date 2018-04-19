@@ -5,9 +5,9 @@ import Products from './Products'
 import Home from './Home'
 import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
-
 import { UserDetail } from './User/UserDetail'
 import { UserForm } from './User/UserForm'
+import Orders from './Orders'
 
 const Routes = () => (
   <div className="fill-xy center-xy column">
@@ -16,6 +16,7 @@ const Routes = () => (
       <AuthRoute path="/home" component={Home} />
       <Route exact path='/' component={Products} />
       <Route path="/single-product" component={SingleProduct} />
+      <Route path="/orders" component={Orders} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
       <Route path="/user/:userId/edit" component={UserForm} />
