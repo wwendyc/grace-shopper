@@ -4,7 +4,7 @@ const { adminsOnly, authUser } = require('./gatekeeping')
 module.exports = router
 
 // GET /api/users
-router.get('/', adminsOnly, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       include: [{ model: Order }]
@@ -15,7 +15,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.get('/:id', authUser, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const singleUser = await User.findOne({
       include: [{ model: Review }],
@@ -50,7 +50,7 @@ router.get('/admin', adminsOnly, async (req, res, next) => {
 })
 
 // Create user
-router.post('/', adminsOnly, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
     res.status(201).json(newUser)
@@ -60,13 +60,13 @@ router.post('/', adminsOnly, async (req, res, next) => {
 })
 
 // Update user
-router.put('/:id', adminsOnly, async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const user = await User.findOne({
+    const targetUser = await User.findOne({
       where: { id: req.params.id }
     })
-    if (user) {
-      const updatedUser = await User.update(req.body)
+    if (targetUser) {
+      const updatedUser = await targetUser.update(req.body)
       res.json(updatedUser)
     } else {
       res.sendStatus(404)
@@ -77,7 +77,7 @@ router.put('/:id', adminsOnly, async (req, res, next) => {
 })
 
 // Delete user
-router.delete('/', adminsOnly, async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const deleteUser = await User.destroy({
       where: { id: req.params.id }
