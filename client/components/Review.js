@@ -18,33 +18,21 @@ class Review extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // this.props.addReview(this.state);
+    this.props.addReview(this.state);
   }
 
   render(){
-    // const reviews =  this.state.product.selectedProduct.reviews || []
-    const reviews = [{
-      review: 'excellent',
-      rating: 4
-    },
-    {
-      review: 'OutStanding',
-      rating: 5
-    }]
+    const reviews =  this.props.selectedProduct.reviews || []
+    // const reviews = [{
+    //   review: 'excellent',
+    //   rating: 4
+    // },
+    // {
+    //   review: 'OutStanding',
+    //   rating: 5
+    // }]
     return (
       <div>
-
-        {/* <div>Reviews for Product:<ul> {
-            (this.props.state.product.selectedProduct.reviews.length)
-            ?
-            this.props.state.product.selectedProduct.reviews.map(review => (
-              <li key= {review.id}>
-                Rated: {review.rating} {review.review}
-              </li>
-              ))
-            :
-              <div>No reviews for this product yet</div>
-        } </ul> </div> */}
 
         <div>Reviews for Product:<ul> {
             (reviews.length)
@@ -69,13 +57,13 @@ class Review extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state
+    selectedProduct: state.product.selectedProduct
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // addReview: (review) => dispatch(addReview(review)),
+    addReview: (review) => dispatch(addReview(review)),
   }
 }
 
