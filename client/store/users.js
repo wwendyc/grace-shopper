@@ -10,7 +10,10 @@ const DELETE_USER = 'DELETE_USER'
 /**
  * INITIAL STATE
  */
-const initialState = []
+const initialState = {
+  usersList: [],
+  singleUser: {}
+}
 
 /**
  * ACTION CREATORS
@@ -18,7 +21,7 @@ const initialState = []
 const getAllUsers = users => ({type: GET_ALL_USERS, users})
 const getOneUser = userId => ({type: GET_ONE_USER, userId})
 const addUser = user => ({type: ADD_USER, user})
-const editUser = (userId, user) => ({type: EDIT_USER, userId, user})
+const editUser = user => ({type: EDIT_USER, user})
 const deleteUser = userId => ({type: DELETE_USER, userId})
 
 /**
@@ -52,7 +55,7 @@ export const updateUser = (userId, user) => {
   return async (dispatch, _, {axios}) => {
     const updatedUser = await axios.put(`/api/user/${userId}`, user)
       .catch(err => console.err('Unable to update user'))
-    dispatch(editUser(userId, updatedUser.data))
+    dispatch(editUser(updatedUser.data))
   }
 }
 
@@ -70,21 +73,36 @@ export const removeUser = (userId) => {
 export default (state = initialState, action) => {
   switch (action.type) {
   case GET_ALL_USERS:
-    return action.users
+    return {
+      ...state,
+      usersList: action.users
+    }
   case GET_ONE_USER:
-    return
+    return {
+      ...state,
+      singleUser: action.user
+    }
   case ADD_USER:
-    return [...state, action.user]
+    return {
+      ...state,
+      usersList: [...state.usersList, action.user]
+    }
   case EDIT_USER:
-    const updatedUsersList = state.map(user => {
-      return user.id === action.userId ? action.user : user
+    const updatedUsersList = state.usersList.map(user => {
+      return user.id === action.user.id ? action.user : user
     })
-    return updatedUsersList
+    return {
+      ...state,
+      usersList: updatedUsersList
+    }
   case DELETE_USER:
-    const updatedList = state.filter(user => {
+    const updatedUsersList = state.usersList.filter(user => {
       return user.id !== action.userId
     })
-    return updatedList
+    return {
+      ...state,
+      usersList: updatedUsersList
+    }
   default:
     return state
   }
