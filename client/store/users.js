@@ -19,7 +19,7 @@ const initialState = {
  * ACTION CREATORS
  */
 const getAllUsers = users => ({type: GET_ALL_USERS, users})
-const getOneUser = userId => ({type: GET_ONE_USER, userId})
+const getOneUser = user => ({type: GET_ONE_USER, user})
 const addUser = user => ({type: ADD_USER, user})
 const editUser = user => ({type: EDIT_USER, user})
 const deleteUser = userId => ({type: DELETE_USER, userId})
@@ -30,7 +30,7 @@ const deleteUser = userId => ({type: DELETE_USER, userId})
 export const getUsersList = () => {
   return async (dispatch, _, {axios}) => {
     const allUsers = await axios.get('/api/users')
-      .catch(err => console.err('Unable to get users'))
+      .catch(err => console.log('Unable to get users'))
     dispatch(getAllUsers(allUsers.data))
   }
 }
@@ -38,7 +38,7 @@ export const getUsersList = () => {
 export const getSingleUser = (userId) => {
   return async (dispatch, _, {axios}) => {
     const singleUser = await axios.get(`/api/users/${userId}`)
-      .catch(err => console.err('Unable to retrieve user'))
+      .catch(err => console.log('Unable to retrieve user'))
     dispatch(getOneUser(singleUser.data))
   }
 }
@@ -46,7 +46,7 @@ export const getSingleUser = (userId) => {
 export const createUser = user => {
   return async (dispatch, _, {axios}) => {
     const newUser = await axios.post('/api/users', user)
-      .catch(err => console.err('Unable to create user'))
+      .catch(err => console.log('Unable to create user'))
     dispatch(addUser(newUser.data))
   }
 }
@@ -54,7 +54,7 @@ export const createUser = user => {
 export const updateUser = (userId, user) => {
   return async (dispatch, _, {axios}) => {
     const updatedUser = await axios.put(`/api/user/${userId}`, user)
-      .catch(err => console.err('Unable to update user'))
+      .catch(err => console.log('Unable to update user'))
     dispatch(editUser(updatedUser.data))
   }
 }
@@ -62,7 +62,7 @@ export const updateUser = (userId, user) => {
 export const removeUser = (userId) => {
   return async (dispatch, _, {axios}) => {
     await axios.delete(`/api/user/${userId}`)
-      .catch(err => console.err('Unable to delete user'))
+      .catch(err => console.log('Unable to delete user'))
     dispatch(deleteUser(userId))
   }
 }
