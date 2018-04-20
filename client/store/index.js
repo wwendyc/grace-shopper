@@ -4,10 +4,13 @@ import thunks from 'redux-thunk'
 import axios from 'axios'
 import history from '../history'
 import user from './user'
+import users from './users'
 import product from './product'
 import orders from './orders'
 
-const reducer = combineReducers({user, product, orders})
+// user is for login
+// users is for retrieving user data
+const reducer = combineReducers({user, users, product, orders})
 
 const store = createStore(
   reducer,
