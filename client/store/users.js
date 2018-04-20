@@ -96,12 +96,12 @@ export default (state = initialState, action) => {
       usersList: updatedUsersList
     }
   case DELETE_USER:
-    const updatedUsersList = state.usersList.filter(user => {
+    const updatedList = state.usersList.filter(user => {
       return user.id !== action.userId
     })
     return {
       ...state,
-      usersList: updatedUsersList
+      usersList: updatedList
     }
   default:
     return state
