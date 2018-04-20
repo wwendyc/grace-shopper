@@ -2,8 +2,9 @@
 
 const {expect} = require('chai')
 const request = require('supertest')
-const {db, Order} = require('../../db')
+const {db, Order, User} = require('../../db')
 const app = require('../../app')
+const session = require('supertest-session')
 
 describe('Order routes', () => {
   beforeEach(async () => {
@@ -12,6 +13,12 @@ describe('Order routes', () => {
 
   // ** Need to find out how to have a user make the request
   describe('/api/orders/', () => {
+    let testSession = null
+
+    const codysName = 'Cody'
+    const codysEmail = 'cody@puppybook.com'
+    const codysPwd = '123'
+
     let codysOrder
     const orderProducts = [{
       id: 1,
@@ -25,6 +32,13 @@ describe('Order routes', () => {
     const updatedAddress = '456 Poop Lane'
 
     beforeEach(async () => {
+      await User.create({
+        name: codysName,
+        email: codysEmail,
+        password: codysPwd,
+        isAdmin: true
+      })
+
       codysOrder = await Order.create({
         products: orderProducts,
         address: codysAddress,
@@ -32,10 +46,17 @@ describe('Order routes', () => {
         checkoutDate: orderCheckoutDate,
         totalPrice: orderTotalPrice
       })
+
+      testSession = session(app)
+
+      await testSession
+        .put('/auth/local')
+        .send({email: codysEmail, password: codysPwd})
+        .expect(200)
     })
 
     it('GET /api/orders', async () => {
-      await request(app)
+      await testSession
         .get('/api/orders')
         .expect(200)
         .then(res => {

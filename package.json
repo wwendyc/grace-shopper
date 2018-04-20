@@ -24,6 +24,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "history": "^4.7.2",
+    "moment": "^2.22.1",
     "morgan": "^1.9.0",
     "normalizr": "^3.2.4",
     "passport": "^0.4.0",
@@ -38,7 +39,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "sequelize": "^4.37.5"
+    "sequelize": "^4.37.5",
+    "supertest-session": "^3.2.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
@@ -51,6 +53,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-datetime": "^1.5.0",
+    "chai-as-promised": "^7.1.1",
     "css-loader": "^0.28.10",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

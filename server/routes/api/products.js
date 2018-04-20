@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, Category} = require('../../db')
+const {Product, Review, Category, User} = require('../../db')
 module.exports = router
 
 // api/products
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res, next) => {
     const deletedProduct = await Product.destroy({
       where: {id}
     })
-    if (deletedProduct) res.json(deletedProduct)
+    if (deletedProduct) res.status(200).json({ msg: 'Product was deleted!' })
     else res.status(404).send('Product not found!')
   } catch (error) {
     next(error)
@@ -64,11 +64,22 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const product = await Product.findById(id)
+    if (product) res.json(product)
+    else res.status(404).json({ msg: 'Product not found!' })
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const productToAdd = req.body
     const newProduct = await Product.create(req.body)
-    res.json(newProduct)
+    res.status(201).json({ msg: `${newProduct.name} has been added!`  })
   } catch (error) {
     next(error)
   }
@@ -77,7 +88,7 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const allProducts = await Product.findAll({
-      include: [{model: Review}, {model: Category}]
+      include: [{model: Review, include: [User]}, {model: Category}]
     })
     if (allProducts.length > 0) res.json(allProducts)
     else res.status(404).send('No products found!')

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Review} = require('../../db')
+const {Review, Product, User} = require('../../db')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -11,9 +11,25 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
+  // console.log(req.user)
   try {
-    const review = await Review.create(req.body)
-    res.json(review)
+    const review = await Review.create(req.body.review)
+    const reviewId = review.id
+
+    if (req.body.selectedProduct){
+      const product = await Product.findById(req.body.selectedProduct.id)
+      await review.setProduct(product)
+    }
+
+    if (req.user){
+      const user = await User.findById(req.user.id)
+      await review.setUser(user)
+    }
+
+    const newReview = await Review.findById(reviewId, {
+      include: [{model: User}]
+    })
+    res.status(201).json(newReview)
   } catch (err) {
     next(err)
   }
@@ -41,7 +57,8 @@ router.delete('/:id', async (req, res, next) => {
       }
     })
     if (noOfRows){
-      res.sendStatus(204)
+      // res.sendStatus(204)
+      res.status(200).json({ msg: 'Review deleted!' })
     } else {
       const error = new Error('Review not found')
       error.status = 404
