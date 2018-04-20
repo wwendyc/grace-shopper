@@ -44,14 +44,16 @@ const seed = async () => {
           "name": "Sulley's thunder roar",
           "imgUrl": "https://www.conmishijos.com/assets/posts/0000/551-personajes-de-la-pelicula-monsters-university-sulley.jpg",
           "quantity": 2,
-          "price": 150
+          "price": 150,
+          "subtotal": 300
         },
         {
           "id": 2,
           "name": "Scary tactics with Mike Wazowski",
           "imgUrl": "http://cinemabh.com/wp-content/uploads/2013/02/Universidade-Monstros-Mike-Wazowski-poster.jpg",
           "quantity": 3,
-          "price": 101.75
+          "price": 101.75,
+          "subtotal": 305.25
         }
       ],
       "address": "123 fake st",
@@ -69,14 +71,16 @@ const seed = async () => {
           "name": `Scott "Squishy" Scribbles`,
           "imgUrl": "http://hbimg.b0.upaiyun.com/a81510b8bfc47fb0a78fd590dded3d6ae99be19e2436d-13OZTA_fw658",
           "quantity": 2,
-          "price": 230.50
+          "price": 230.50,
+          "subtotal": 461
         },
         {
           "id": 4,
           "name": "Art",
           "imgUrl": "https://www.conmishijos.com/assets/posts/0000/546-personajes-de-la-pelicula-monstruos-university-art.jpg",
           "quantity": 3,
-          "price": 375
+          "price": 375,
+          "subtotal": 1125
         }
       ],
       "address": "123 fake st",
