@@ -2,33 +2,27 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {UserForm} from './UserForm'
-// need to import Order component
+import UserForm from './UserForm'
+import Orders from '../Orders'
 
 class UserDetail extends Component {
   render() {
-    const { id, name, email, orders } = this.props
+    const { id, name, email, orders } = this.props.user
     return (
       <div>
         <h1>{name}</h1>
         <h5>{email}</h5>
-        <h5>Password</h5>
         {/* pass the user data down to the form */}
         <Link to={`/user/${id}/edit`}><button>Edit</button></Link>
-        <h3>Order history:</h3>
-        <ul>
-          orders.map(order => (
-            {/* <Orders key={order.id} {...order} /> */}
-          ))
-        </ul>
+        <Link to="/orders"><h5>View orders</h5></Link>
       </div>
     )
   }
 }
 
 const mapState = (state, props) => {
-  const paramId = Number(props.match.params.userId)
-  const user = state.users.find(user => user.id === paramId)
+  const paramId = +props.match.params.userId
+  const user = state.users.usersList.find(user => user.id === paramId)
   return { user }
 }
 

@@ -4,7 +4,7 @@ const { adminsOnly, authUser } = require('./gatekeeping')
 module.exports = router
 
 // GET /api/users
-router.get('/', adminsOnly, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       include: [{ model: Order }]
@@ -18,7 +18,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
 router.get('/:id', authUser, async (req, res, next) => {
   try {
     const singleUser = await User.findOne({
-      include: [{ model: Review }],
+      include: [{ model: Order }, { model: Review }],
       where: { id: req.params.id }
     })
     singleUser ? res.json(singleUser) : res.sendStatus(404)
@@ -87,3 +87,5 @@ router.delete('/:id', adminsOnly, async (req, res, next) => {
     next(err)
   }
 })
+
+
