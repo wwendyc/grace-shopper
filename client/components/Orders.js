@@ -36,8 +36,8 @@ class Orders extends Component {
                     order.products.map(product => {
                       return (
                         <div key={product.id}>
+                          <img src={product.imgUrl} />
                           <ul>
-                            <li><img src={product.imgUrl} /></li>
                             <li>
                               <Link
                                 to='/single-product'
