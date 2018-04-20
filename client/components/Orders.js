@@ -36,13 +36,13 @@ class Orders extends Component {
                     order.products.map(product => {
                       return (
                         <div key={product.id}>
+                          <img src={product.imgUrl} />
                           <ul>
-                            <li>{product.imgUrl}</li>
                             <li>
                               <Link
                                 to='/single-product'
                                 onClick={() => setProduct(product)}
-                                >Name: {product.name}
+                                >{product.name}
                               </Link>
                             </li>
                             <li>${product.price.toFixed(2)}</li>
