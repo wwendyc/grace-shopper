@@ -39,55 +39,53 @@ const seed = async () => {
     Order.create({
       "id": 1,
       "products": [
-      {
-      "id": 1,
-      "name": "item",
-      "imgUrl": "",
-      "quantity": 2,
-      "price": 150
-      },
-      {
-      "id": 2,
-      "name": "item2",
-      "imgUrl": "",
-      "quantity": 3,
-      "price": 101.75
-      }
+        {
+          "id": 1,
+          "name": "Sulley's thunder roar",
+          "imgUrl": "https://www.conmishijos.com/assets/posts/0000/551-personajes-de-la-pelicula-monsters-university-sulley.jpg",
+          "quantity": 2,
+          "price": 150
+        },
+        {
+          "id": 2,
+          "name": "Scary tactics with Mike Wazowski",
+          "imgUrl": "http://cinemabh.com/wp-content/uploads/2013/02/Universidade-Monstros-Mike-Wazowski-poster.jpg",
+          "quantity": 3,
+          "price": 101.75
+        }
       ],
       "address": "123 fake st",
       "status": "Created",
-      "checkoutDate": "2018-04-18T04:00:00.000Z",
-      "totalPrice": 200,
-      "createdAt": "2018-04-18T16:20:08.421Z",
-      "updatedAt": "2018-04-18T16:20:08.421Z",
+      "checkoutDate": "04/18/2018",
+      "totalPrice": 605.25,
+      "createdAt": "04/18/2018",
       "userId": 1
-      }),
+    }),
     Order.create({
       "id": 2,
       "products": [
-      {
-      "id": 3,
-      "name": "item3",
-      "imgUrl": "",
-      "quantity": 2,
-      "price": 230.50
-      },
-      {
-      "id": 4,
-      "name": "item4",
-      "imgUrl": "",
-      "quantity": 3,
-      "price": 375
-      }
+        {
+          "id": 3,
+          "name": `Scott "Squishy" Scribbles`,
+          "imgUrl": "http://hbimg.b0.upaiyun.com/a81510b8bfc47fb0a78fd590dded3d6ae99be19e2436d-13OZTA_fw658",
+          "quantity": 2,
+          "price": 230.50
+        },
+        {
+          "id": 4,
+          "name": "Art",
+          "imgUrl": "https://www.conmishijos.com/assets/posts/0000/546-personajes-de-la-pelicula-monstruos-university-art.jpg",
+          "quantity": 3,
+          "price": 375
+        }
       ],
       "address": "123 fake st",
-      "status": "Created",
-      "checkoutDate": "2018-04-18T04:00:00.000Z",
-      "totalPrice": 130.12,
-      "createdAt": "2018-04-18T16:24:52.100Z",
-      "updatedAt": "2018-04-18T16:24:52.100Z",
+      "status": "Processing",
+      "checkoutDate": "04/19/2018",
+      "totalPrice": 1586,
+      "createdAt": "04/19/2018",
       "userId": 1
-      })
+    })
   ])
 
   console.log(`seeded ${orders.length} orders`)
