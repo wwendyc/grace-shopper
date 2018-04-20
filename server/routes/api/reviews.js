@@ -57,7 +57,8 @@ router.delete('/:id', async (req, res, next) => {
       }
     })
     if (noOfRows){
-      res.sendStatus(204)
+      // res.sendStatus(204)
+      res.status(200).json({ msg: 'Review deleted!' })
     } else {
       const error = new Error('Review not found')
       error.status = 404
