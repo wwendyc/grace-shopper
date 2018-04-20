@@ -56,11 +56,9 @@ const addedReview = (review) => {
   })
 }
 
-export const addReview = (review) => {
-  console.log("at review")
+export const addReview = (review, selectedProduct) => {
   return async (dispatch) => {
-    const response = await axios.post('api/reviews/', review )
-    console.log(response.data)
+    const response = await axios.post('api/reviews/', {review, selectedProduct} )
     dispatch(addedReview(response.data))
   }
 }

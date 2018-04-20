@@ -42,11 +42,11 @@ class SingleProduct extends React.Component {
     // const product =  selectedProduct || {};
     // const categories = selectedProduct.categories || []
     // const reviews = selectedProduct.reviews || []
-    // console.log(reviews)
+    // console.log(this.props.selectedProduct)
     return (
       <div>
-        <div> Product Name: {product.name}</div>
         <div><img src={product.imgUrl} /></div>
+        <div> Product Name: {product.name}</div>
         <div> Discription: {product.description}</div>
 
         <div>Categories for Product:<ul> {

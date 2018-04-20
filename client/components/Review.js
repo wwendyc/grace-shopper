@@ -15,14 +15,13 @@ class Review extends React.Component {
       [event.target.name]: event.target.value
     })
   }
-
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addReview(this.state);
+    this.props.addReview(this.state, this.props.state.product.selectedProduct)
   }
-
   render(){
-    const reviews =  this.props.selectedProduct.reviews || []
+    const reviews =  this.props.state.product.selectedProduct.reviews || []
+    // const user =  this.props.state.product.selectedProduct.reviews.user || {}
 
     return (
       <div>
@@ -32,16 +31,23 @@ class Review extends React.Component {
             ?
             reviews.map(review => (
               <li key= {review.id}>
-                Rated: {review.rating} {review.review}
+                Rated: {review.rating} {review.review} <div> Reviewed by: {review.user && review.user.name} </div>
               </li>
               ))
             :
               <div>No reviews for this product yet</div>
         } </ul> </div>
 
-        <form onSubmit = {this.handleSubmit}>
-          <textarea name="review" onChange={this.handleChange} value={this.state.review} />
-          <button type= "submit" disabled = {!(this.state.review)}>Add Review </button>
+        <form onSubmit = {this.handleSubmit}>{
+          (Object.keys(this.props.state.user).length !== 0 )
+          ?
+            <div>
+            <textarea name="review" onChange={this.handleChange} value={this.state.review} />
+            <button type= "submit" disabled = {!(this.state.review) || (this.state.review.length < 10)}>Add Review </button>
+            </div>
+          :
+            ''
+        }
         </form>
       </div>
     )
@@ -50,13 +56,13 @@ class Review extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    selectedProduct: state.product.selectedProduct
+    state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReview: (review) => dispatch(addReview(review)),
+    addReview: (review, selectedProduct) => dispatch(addReview(review, selectedProduct)),
   }
 }
 

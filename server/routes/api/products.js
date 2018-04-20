@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, Category} = require('../../db')
+const {Product, Review, Category, User} = require('../../db')
 module.exports = router
 
 // api/products
@@ -88,7 +88,7 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const allProducts = await Product.findAll({
-      include: [{model: Review}, {model: Category}]
+      include: [{model: Review, include: [User]}, {model: Category}]
     })
     if (allProducts.length > 0) res.json(allProducts)
     else res.status(404).send('No products found!')
