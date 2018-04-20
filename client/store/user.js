@@ -44,16 +44,17 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
+
 /**
  * REDUCER
  */
 export default (state = defaultUser, action) => {
   switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return defaultUser
-    default:
-      return state
+  case GET_USER:
+    return action.user
+  case REMOVE_USER:
+    return defaultUser
+  default:
+    return state
   }
 }

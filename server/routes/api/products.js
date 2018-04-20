@@ -4,6 +4,9 @@ module.exports = router
 
 // api/products
 
+// send back confirmation on product being deleted instead of sending back the deleted product
+// and correct status code
+
 router.get('/category/:category', async (req, res, next) => {
   try {
     const category = req.params.category
@@ -38,7 +41,7 @@ router.delete('/:id', async (req, res, next) => {
     const deletedProduct = await Product.destroy({
       where: {id}
     })
-    if (deletedProduct) res.json(deletedProduct)
+    if (deletedProduct) res.status(200).json({ msg: 'Product was deleted!' })
     else res.status(404).send('Product not found!')
   } catch (error) {
     next(error)
@@ -61,11 +64,22 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const product = await Product.findById(id)
+    if (product) res.json(product)
+    else res.status(404).json({ msg: 'Product not found!' })
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const productToAdd = req.body
     const newProduct = await Product.create(req.body)
-    res.json(newProduct)
+    res.status(201).json({ msg: `${newProduct.name} has been added!`  })
   } catch (error) {
     next(error)
   }
@@ -84,7 +98,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.use((req, res, next) => {
-  const err = new Error('API route not found!')
-  err.status = 404
+  const error = new Error('API route not found!')
+  error.status = 404
   next(error)
 })
