@@ -2,17 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
+import {getSingleUser} from '../../store/users'
+
 import UserForm from './UserForm'
 import Orders from '../Orders'
 
 class UserDetail extends Component {
+  componentDidMount () {
+    const userId = +this.props.match.params.userId
+    this.props.singleUserData(userId)
+  }
+
   render() {
-    const { id, name, email, orders } = this.props.user
+    const { id, name, email, orders } = this.props.singleUser
     return (
       <div>
         <h1>{name}</h1>
         <h5>{email}</h5>
-        {/* pass the user data down to the form */}
         <Link to={`/user/${id}/edit`}><button>Edit</button></Link>
         <Link to="/orders"><h5>View orders</h5></Link>
       </div>
@@ -20,78 +26,12 @@ class UserDetail extends Component {
   }
 }
 
-const mapState = (state, props) => {
-  const paramId = +props.match.params.userId
-  const user = state.users.usersList.find(user => user.id === paramId)
-  return { user }
-}
+const mapState = (state) => ({
+  singleUser: state.users.singleUser
+})
 
-export default connect(mapState)(UserDetail)
+const mapDispatch = (dispatch) => ({
+  singleUserData: (userId) => dispatch(getSingleUser(userId))
+})
 
-/*
-[
-  {
-    id: 1,
-    name: 'Cody',
-    email: 'cody@email.com',
-    googleId: null,
-    isAdmin: false,
-    createdAt: '2018-04-18T16:18:28.645Z',
-    updatedAt: '2018-04-18T16:18:28.645Z',
-    orders: [
-      {
-        id: 1,
-        products: [
-          {
-            id: 1,
-            name: 'item',
-            imgUrl: '',
-            quantity: 2,
-            price: 2
-          },
-          {
-            id: 2,
-            name: 'item2',
-            imgUrl: '',
-            quantity: 3,
-            price: 3.75
-          }
-        ],
-        address: '123 fake st',
-        status: 'Created',
-        checkoutDate: '2018-04-18T04:00:00.000Z',
-        totalPrice: 50.12,
-        createdAt: '2018-04-18T16:20:08.421Z',
-        updatedAt: '2018-04-18T16:20:08.421Z',
-        userId: 1
-      },
-      {
-        id: 2,
-        products: [
-          {
-            id: 3,
-            name: 'item3',
-            imgUrl: '',
-            quantity: 2,
-            price: 2
-          },
-          {
-            id: 4,
-            name: 'item4',
-            imgUrl: '',
-            quantity: 3,
-            price: 3.75
-          }
-        ],
-        address: '123 fake st',
-        status: 'Created',
-        checkoutDate: '2018-04-18T04:00:00.000Z',
-        totalPrice: 50.12,
-        createdAt: '2018-04-18T16:24:52.100Z',
-        updatedAt: '2018-04-18T16:24:52.100Z',
-        userId: 1
-      }
-    ]
-  }
-]
-*/
+export default connect(mapState, mapDispatch)(UserDetail)
