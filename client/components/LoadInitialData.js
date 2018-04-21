@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
+import {getUsersList} from '../store/users'
 import Main from './Main'
 
 // LoadInitialData: this sits on top of our `Main` component and fetches
@@ -12,6 +13,7 @@ export class LoadInitialData extends Component {
   constructor () {
     super()
     this.state = {
+      users: [],
       loaded: false,
       error: false
     }
@@ -20,7 +22,11 @@ export class LoadInitialData extends Component {
   async componentDidMount () {
     try {
       await this.props.load()
-      this.setState({loaded: true})
+      console.log(this.props)
+      this.setState({
+        users: [],
+        loaded: true
+      })
     } catch (error) {
       this.setState({error: true})
     }
@@ -41,7 +47,8 @@ const mapDispatch = (dispatch) => {
     // This will execute when our Main component mounts. This is a great place
     // to fetch our initial data.
     load: async () => {
-      await dispatch(me())
+      await dispatch(me()),
+      await dispatch(getUsersList())
     }
   }
 }
