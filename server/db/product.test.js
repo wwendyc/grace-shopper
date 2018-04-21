@@ -7,7 +7,7 @@ const {db, Product} = require('./index')
 chai.use(chaiAsPromised)
 
 describe('Product model', () => {
-  
+
   let product
 
   beforeEach(async () => {
