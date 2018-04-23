@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
+import {getUsersList} from '../store/users'
 import Main from './Main'
 
 // LoadInitialData: this sits on top of our `Main` component and fetches
@@ -20,7 +21,10 @@ export class LoadInitialData extends Component {
   async componentDidMount () {
     try {
       await this.props.load()
-      this.setState({loaded: true})
+      console.log(this.props)
+      this.setState({
+        loaded: true
+      })
     } catch (error) {
       this.setState({error: true})
     }

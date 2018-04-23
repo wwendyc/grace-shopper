@@ -61,6 +61,7 @@ export const getOrders = () => {
 export const addOrder = (order) => {
   return async (dispatch, getState, { axios, history }) => {
     try {
+      console.log(order)
       const { data } = await axios.post('/api/orders', order);
       dispatch(add(data));
 

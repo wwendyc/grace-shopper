@@ -9,7 +9,16 @@ const Order = db.define('order', {
     allowNull: false
   },
   address: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
   },
   status: {
     type: Sequelize.ENUM(

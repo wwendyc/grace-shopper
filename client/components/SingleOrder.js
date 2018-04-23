@@ -19,6 +19,7 @@ const SingleOrder = (props) => {
         <div>
           <h3>Status: {selectedOrder.status}</h3>
           <h3>Total: ${selectedOrder.totalPrice.toFixed(2)}</h3>
+          <h4>Notifications Sent To: {selectedOrder.email}</h4>
         </div>
       </div>
       <div>
