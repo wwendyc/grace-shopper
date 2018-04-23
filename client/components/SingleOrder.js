@@ -19,6 +19,7 @@ const SingleOrder = (props) => {
         <div>
           <h3>Status: {selectedOrder.status}</h3>
           <h3>Total: ${selectedOrder.totalPrice.toFixed(2)}</h3>
+          <h4>Notifications Sent To: {selectedOrder.email}</h4>
         </div>
       </div>
       <div>
@@ -37,7 +38,7 @@ const SingleOrder = (props) => {
                 </li>
                 <li>${product.price.toFixed(2)}</li>
                 <li>Quantity: {product.quantity}</li>
-                <li>Subtotal: ${(product.price * product.quantity).toFixed(2)}</li>
+                <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
               </ul>
             </div>
           )
