@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getProducts, setProduct } from '../store/product'
 
 
-const Products = (props) => {
+export const Products = (props) => {
 
   const  {products, setProduct} = props
 

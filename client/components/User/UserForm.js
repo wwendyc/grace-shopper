@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import {updateUser} from '../../store/user'
+import { updateUser } from '../../store/users'
 
 class UserForm extends Component {
   constructor() {
@@ -9,8 +9,8 @@ class UserForm extends Component {
     this.state = {
       name: '',
       email: '',
-      passowrd: '',
-      admin: false
+      password: '',
+      isAdmin: ''
     }
   }
 
@@ -22,45 +22,62 @@ class UserForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-
-    this.props.editUser() //userId, user
+    const newInfo = Object.keys(this.state).reduce((obj, key) => {
+      if (this.state[key]) obj[key] = this.state[key]
+      return obj
+    }, {})
+    const userId = this.props.targetUser.id
+    this.props.editUser(userId, newInfo)
   }
 
   render() {
-    // admin setting - need to consider how to distinguish between admin and user... via routes?
-    const {name, email, password, admin} = this.state
+    const { id, name, email } = this.props.targetUser
+    const { isAdmin } = this.props.user
+    const password = ''
     return (
       <div className="userForm">
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="email">Email: </label>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">Password: </label>
-          <input
-            type="text"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="admin">Admin status: </label>
-          <input
-            type="text"
-            name="admin"
-            value={admin}
-            onChange={this.handleChange}
-          />
-          <button type='submit'>Submit</button>
+          <div>
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              name="name"
+              placeholder={name}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email: </label>
+            <input
+              type="text"
+              name="email"
+              placeholder={email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password: </label>
+            <input
+              type="text"
+              name="password"
+              placeholder={password}
+              onChange={this.handleChange}
+            />
+          </div>
+          {isAdmin ? (
+            <div>
+              <label htmlFor="admin">Admin status: </label>
+              <input
+                type="text"
+                name="admin"
+                placeholder={this.state.isAdmin}
+                onChange={this.handleChange}
+              />
+            </div>
+          ) : (
+            ''
+          )}
+          <button type="submit">Submit</button>
         </form>
       </div>
     )
@@ -71,4 +88,4 @@ const mapDispatch = dispatch => ({
   editUser: (userId, user) => dispatch(updateUser(userId, user))
 })
 
-export default UserForm
+export default connect(null, mapDispatch)(UserForm)

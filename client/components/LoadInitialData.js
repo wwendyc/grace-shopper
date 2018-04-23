@@ -13,7 +13,6 @@ export class LoadInitialData extends Component {
   constructor () {
     super()
     this.state = {
-      users: [],
       loaded: false,
       error: false
     }
@@ -24,7 +23,6 @@ export class LoadInitialData extends Component {
       await this.props.load()
       console.log(this.props)
       this.setState({
-        users: [],
         loaded: true
       })
     } catch (error) {
@@ -47,8 +45,7 @@ const mapDispatch = (dispatch) => {
     // This will execute when our Main component mounts. This is a great place
     // to fetch our initial data.
     load: async () => {
-      await dispatch(me()),
-      await dispatch(getUsersList())
+      await dispatch(me())
     }
   }
 }

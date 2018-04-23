@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Review from './Review'
 
-class SingleProduct extends React.Component {
+export class SingleProduct extends React.Component {
   constructor() {
     super()
     this.state = {
