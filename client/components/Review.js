@@ -23,8 +23,8 @@ class Review extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('You have entered:', this.state.review);
-    console.log('You have selected:', this.state.rating);
+    // console.log('You have entered:', this.state.review);
+    // console.log('You have selected:', this.state.rating);
     this.props.addReview(this.state, this.props.state.product.selectedProduct)
   }
   render(){
