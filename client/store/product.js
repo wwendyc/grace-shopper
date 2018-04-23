@@ -3,18 +3,11 @@ import axios from 'axios'
 const initialState = {
   products: [],
   selectedProduct: {},
-  cart: []
 }
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const SELECT_PRODUCT = 'SELECTED_PRODUCT'
 const ADDED_REVIEW = 'ADDED_REVIEW'
-const GET_CART = 'GET_CART'
-
-const getCartAction = cart => ({
-  type: GET_CART,
-  cart
-})
 
 const getProductsAction = products => ({
   type: GET_PRODUCTS,
@@ -30,9 +23,8 @@ export const getProducts = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/products')
     const products = res.data
-    dispatch(getProductsAction(products.products))
-    dispatch(getCartAction(products.cart))
-  } catch (error) { console.log(error) } // redirect to error page instead of just console logging.
+    dispatch(getProductsAction(products))
+  } catch (error) { console.log(error) }
 }
 
 export const setProduct = (product) => (dispatch) => {
@@ -61,8 +53,6 @@ export default (state = initialState, action) => {
     return {...state, selectedProduct: action.product}
   case ADDED_REVIEW:
     return {...state, selectedProduct: {...state.selectedProduct, reviews: [...state.selectedProduct.reviews, action.review]}}
-  case GET_CART:
-    return {...state, cart: action.cart}
   default:
     return state
   }

@@ -2,20 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getProducts, setProduct } from '../store/product'
+import { getCart, addToCart } from  '../store/cart'
 
 
 const Products = (props) => {
   
-  const  {products, setProduct} = props
-  let msg
-  
-  const addToCart = async event => {
-    const id = event.target.id
-    const res = await axios.get(`/api/products/${id}`)
-    const productToAdd = res.data
-    const added = await axios.post('/api/products/addtocart', productToAdd)
-    msg = added.msg
-  }
+  const  {products, setProduct, addToCart} = props
 
   return (
     <div id='ProductsContainer'>
@@ -58,6 +50,11 @@ const mapDispatch = (dispatch, ownProps) => {
       event.preventDefault()
       dispatch(setProduct(product))
       ownProps.history.push('/single-product')
+    },
+    addToCart: (event) => {
+      event.preventDefault()
+      const id = event.target.id
+      dispatch(addToCart(id))
     }
   }
 }
