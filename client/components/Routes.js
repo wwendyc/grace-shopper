@@ -7,7 +7,7 @@ import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
 import Orders from './Orders'
 import SingleOrder from './SingleOrder'
-import UserDetail from './User/UserDetail'
+import UserPage from './User/UserPage'
 import UserForm from './User/UserForm'
 
 const Routes = () => (
@@ -20,8 +20,7 @@ const Routes = () => (
       <Route path="/orders" component={Orders} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/user/:userId" component={UserDetail} />
-      <Route path="/user/:userId/edit" component={UserForm} />
+      <Route path="/user/:userId" component={UserPage} />
       <Route component={NoMatch} />
     </Switch>
   </div>

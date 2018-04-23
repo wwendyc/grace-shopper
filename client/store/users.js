@@ -53,7 +53,8 @@ export const createUser = user => {
 
 export const updateUser = (userId, user) => {
   return async (dispatch, _, {axios}) => {
-    const updatedUser = await axios.put(`/api/user/${userId}`, user)
+    console.log('in store ', userId, user)
+    const updatedUser = await axios.put(`/api/users/${userId}`, user)
       .catch(err => console.log('Unable to update user'))
     dispatch(editUser(updatedUser.data))
   }
@@ -61,7 +62,7 @@ export const updateUser = (userId, user) => {
 
 export const removeUser = (userId) => {
   return async (dispatch, _, {axios}) => {
-    await axios.delete(`/api/user/${userId}`)
+    await axios.delete(`/api/users/${userId}`)
       .catch(err => console.log('Unable to delete user'))
     dispatch(deleteUser(userId))
   }
