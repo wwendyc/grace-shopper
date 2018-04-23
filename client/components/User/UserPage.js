@@ -6,7 +6,7 @@ import { getSingleUser } from '../../store/users'
 
 import UserInfo from './UserInfo'
 import UserForm from './UserForm'
-import UserOrders from './UserOrders'
+import Orders from '../Orders'
 
 class UserPage extends Component {
   componentDidMount() {
@@ -19,23 +19,23 @@ class UserPage extends Component {
     const user = this.props.user
     return (
       <div>
-        {user.id === id || user.isAdmin ? (
           <div>
             <UserInfo targetUser={this.props.targetUser} />
             <Switch>
               <Route
                 path="/user/edit"
-                render={() => <UserForm targetUser={this.props.targetUser} />}
+                render={() => <UserForm {...this.props} />}
               />
               <Route
                 path="/user/orders"
-                render={() => <UserOrders targetUser={this.props.targetUser} />}
+                render={() => <Orders targetUser={this.props.targetUser} />}
               />
             </Switch>
           </div>
+        {/* {user.id === id || user.isAdmin ? (
         ) : (
           <h5>Please login to view this page</h5>
-        )}
+        )} */}
       </div>
     )
   }
