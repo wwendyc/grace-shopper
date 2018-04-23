@@ -34,6 +34,7 @@ class Orders extends Component {
                 <li>Date: {moment(order.checkoutDate).format('LL')}</li>
                 <li>Status: {order.status}</li>
                 <li>Total: ${order.totalPrice.toFixed(2)}</li>
+                <li>Notifications Sent To: {order.email}</li>
                 <li>
                   Items:
                   {order.products.map(product => {
@@ -52,9 +53,7 @@ class Orders extends Component {
                           <li>${product.price.toFixed(2)}</li>
                           <li>Quantity: {product.quantity}</li>
                           <li>
-                            Subtotal: ${(
-                              product.price * product.quantity
-                            ).toFixed(2)}
+                            Subtotal: ${product.subtotal.toFixed(2)}
                           </li>
                         </ul>
                       </div>
