@@ -15,21 +15,20 @@ router.post('/', (req, res, next) => {
     } else {
       cart[id].quantity += 1
     }
-    console.log(req.session.cart[id].quantity)
     res.status(201).json(cart)
   } catch (error) {
-    console.log(error)
     res.status(500).json({ msg: 'There was an error adding this item to your cart, please try again.'})
   }
 })
 
-router.delete('/', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   try {
-    const productToRemove = req.body
-    const id = prodToRemove
+    const id = req.params.id
     const cart = req.session.cart
-    delete cart[id]
-    console.log(req.session.cart[id])
+    if(cart[id].quantity > 1) {
+      cart[id].quantity -= 1
+    }
+    else delete cart[id]
     res.status(204).json(cart)
   } catch (error) {
     console.log(error)

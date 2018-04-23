@@ -1,26 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {getProducts} from '../store/product'
+import {getCart, removeFromCart} from '../store/cart'
 
 const Cart = props => {
 
-  const {cart} = props
+  const {cart, removeFromCart} = props
+  const cartList = (cart === undefined) ? [] : Object.values(cart)
 
-  if (cart.length > 0) {
+  if (cartList.length > 0) {
     return (
-      <div>
+      <div className='OrderContainer' style={{width: "75%"}}>
         {
-          cart.map(product => (
-            <div key={product.id} id='CartContainer' style={{border: '1px solid black', margin: '5px'}}>
-              <div>
+          cartList.map(product => (
+            <div key={product.id} id='CartContainer' style={{margin: "10px"}}>
+              <div style={{display: "flex"}}>
                 <ul>
-                  <li>{product.description}</li>
+                  <li>{product.name}</li>
+                </ul>
+                <ul>
+                  <li>Quantity: {product.quantity}</li>
+                </ul>
+                <ul>
                   <li>Price: ${product.price}</li>
                 </ul>
               </div>
+              <button id={product.id} onClick={event => removeFromCart(event)}>Remove</button>
             </div>
           ))
         }
+        <span style={{margin: "15px"}}>Total ${
+          cartList.map(e => e.price * e.quantity)
+            .reduce((a,b) => a + b)
+        }</span>
       </div>
     )
   }
@@ -28,11 +40,18 @@ const Cart = props => {
 }
 
 const mapState = state => ({
-  cart: state.product.cart
+  cart: state.cart.cart
 })
 
-const mapDispatch = dispatch => ({
-  getProducts: dispatch(getProducts())
-})
+const mapDispatch = dispatch => {
+  return {
+    getCart: dispatch(getCart()),
+    removeFromCart: (event) => {
+      event.preventDefault()
+      const id = event.target.id
+      dispatch(removeFromCart(id))
+    }
+  }
+}
 
 export default connect(mapState, mapDispatch)(Cart)

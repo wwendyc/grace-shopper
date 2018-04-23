@@ -10,7 +10,7 @@ const Products = (props) => {
   const  {products, setProduct, addToCart} = props
 
   return (
-    <div id='ProductsContainer'>
+    <div className='ProductsContainer'>
       {
         products.map(product => {
           return (
@@ -20,9 +20,9 @@ const Products = (props) => {
               </div>
               <div className='ProductContainer' onClick={() => setProduct(product)}>
                 <ul>
-                  <li>Name: {product.name}</li>
-                  <li>Description: {product.description}</li>
-                  <li>Price: ${product.price}</li>
+                  <li className='mainli'>Name: {product.name}</li>
+                  <li className='mainli'>Description: {product.description}</li>
+                  <li className='mainli'>Price: ${product.price}</li>
                   <li>Quantity in stock: {product.inventoryQuantity}</li>
                 </ul>
               </div>
@@ -55,6 +55,7 @@ const mapDispatch = (dispatch, ownProps) => {
       event.preventDefault()
       const id = event.target.id
       dispatch(addToCart(id))
+      ownProps.history.push('/cart')
     }
   }
 }
