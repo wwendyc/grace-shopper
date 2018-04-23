@@ -9,8 +9,8 @@ class UserForm extends Component {
     this.state = {
       name: '',
       email: '',
-      passowrd: '',
-      admin: false
+      password: '',
+      isAdmin: ''
     }
   }
 
@@ -22,12 +22,18 @@ class UserForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    const userId = +this.props.match.params.userId
-    this.props.editUser(userId, { name: 'Gracie' })
+    const newInfo = Object.keys(this.state).reduce((obj, key) => {
+      if (this.state[key]) obj[key] = this.state[key]
+      return obj
+    }, {})
+    const userId = this.props.targetUser.id
+    this.props.editUser(userId, newInfo)
   }
 
   render() {
-    const { name, email, password, admin } = this.state
+    const { id, name, email } = this.props.targetUser
+    const { isAdmin } = this.props.user
+    const password = ''
     return (
       <div className="userForm">
         <form onSubmit={this.handleSubmit}>
@@ -36,7 +42,7 @@ class UserForm extends Component {
             <input
               type="text"
               name="name"
-              value={name}
+              placeholder={name}
               onChange={this.handleChange}
             />
           </div>
@@ -45,7 +51,7 @@ class UserForm extends Component {
             <input
               type="text"
               name="email"
-              value={email}
+              placeholder={email}
               onChange={this.handleChange}
             />
           </div>
@@ -54,19 +60,23 @@ class UserForm extends Component {
             <input
               type="text"
               name="password"
-              value={password}
+              placeholder={password}
               onChange={this.handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="admin">Admin status: </label>
-            <input
-              type="text"
-              name="admin"
-              value={admin}
-              onChange={this.handleChange}
-            />
-          </div>
+          {isAdmin ? (
+            <div>
+              <label htmlFor="admin">Admin status: </label>
+              <input
+                type="text"
+                name="admin"
+                placeholder={this.state.isAdmin}
+                onChange={this.handleChange}
+              />
+            </div>
+          ) : (
+            ''
+          )}
           <button type="submit">Submit</button>
         </form>
       </div>

@@ -7,17 +7,19 @@ import { getOrders, setOrder } from '../store/orders'
 import { setProduct } from '../store/product'
 
 class Orders extends Component {
-  constructor () {
-    super()
-  }
+  render() {
+    const { setOrder, setProduct } = this.props
+    let id, orders
 
-  render () {
-    const { orders, setOrder, setProduct } = this.props
+    if (this.props.targetUser) {
+      orders = this.props.targetUser.orders
+    } else {
+      orders = this.props.orders.list
+    }
 
     return (
       <div>
-      {
-        orders.list.map(order => {
+        {orders.map(order => {
           return (
             <div key={order.id}>
               <ul>
@@ -25,55 +27,58 @@ class Orders extends Component {
                   <Link
                     to={`/orders/${order.id}`}
                     onClick={() => setOrder(order)}
-                    >Order #: {order.id}
+                  >
+                    Order #: {order.id}
                   </Link>
                 </li>
                 <li>Date: {moment(order.checkoutDate).format('LL')}</li>
                 <li>Status: {order.status}</li>
                 <li>Total: ${order.totalPrice.toFixed(2)}</li>
-                <li>Items:
-                  {
-                    order.products.map(product => {
-                      return (
-                        <div key={product.id}>
-                          <img src={product.imgUrl} />
-                          <ul>
-                            <li>
-                              <Link
-                                to='/single-product'
-                                onClick={() => setProduct(product)}
-                                >{product.name}
-                              </Link>
-                            </li>
-                            <li>${product.price.toFixed(2)}</li>
-                            <li>Quantity: {product.quantity}</li>
-                            <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
-                          </ul>
-                        </div>
-                      )
-                    })
-                  }
+                <li>Notifications Sent To: {order.email}</li>
+                <li>
+                  Items:
+                  {order.products.map(product => {
+                    return (
+                      <div key={product.id}>
+                        <img src={product.imgUrl} />
+                        <ul>
+                          <li>
+                            <Link
+                              to="/single-product"
+                              onClick={() => setProduct(product)}
+                            >
+                              {product.name}
+                            </Link>
+                          </li>
+                          <li>${product.price.toFixed(2)}</li>
+                          <li>Quantity: {product.quantity}</li>
+                          <li>
+                            Subtotal: ${product.subtotal.toFixed(2)}
+                          </li>
+                        </ul>
+                      </div>
+                    )
+                  })}
                 </li>
               </ul>
             </div>
           )
-        })
-      }
+        })}
       </div>
     )
   }
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   orders: state.orders
 })
 
-const mapDispatch = (dispatch) => ({
+const mapDispatch = dispatch => ({
   getOrders: dispatch(getOrders()),
-  setOrder: (order) => {
+  setOrder: order => {
     dispatch(setOrder(order))
   },
-  setProduct: (product) => {
+  setProduct: product => {
     dispatch(setProduct(product))
   }
 })
