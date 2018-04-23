@@ -37,7 +37,7 @@ const SingleOrder = (props) => {
                 </li>
                 <li>${product.price.toFixed(2)}</li>
                 <li>Quantity: {product.quantity}</li>
-                <li>Subtotal: ${(product.price * product.quantity).toFixed(2)}</li>
+                <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
               </ul>
             </div>
           )
