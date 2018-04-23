@@ -17,6 +17,10 @@ form {
   max-width: 50%;
 }
 
+button {
+  padding: 10px;
+}
+
 a {
   text-decoration: none;
   color: #753ebd;
