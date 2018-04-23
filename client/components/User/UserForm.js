@@ -10,7 +10,7 @@ class UserForm extends Component {
       name: '',
       email: '',
       password: '',
-      isAdmin: ''
+      isAdmin: false
     }
   }
 
@@ -34,6 +34,7 @@ class UserForm extends Component {
     const { id, name, email } = this.props.targetUser
     const { isAdmin } = this.props.user
     const password = ''
+    // TODO: add validataion
     return (
       <div className="userForm">
         <form onSubmit={this.handleSubmit}>
@@ -66,13 +67,22 @@ class UserForm extends Component {
           </div>
           {isAdmin ? (
             <div>
-              <label htmlFor="admin">Admin status: </label>
+              <p>Admin status: </p>
               <input
-                type="text"
+                type="radio"
+                id="admin"
                 name="admin"
-                placeholder={this.state.isAdmin}
                 onChange={this.handleChange}
               />
+              <label htmlFor="admin">Admin</label>
+
+              <input
+                type="radio"
+                id="nonAdmin"
+                name="admin"
+                onChange={this.handleChange}
+              />
+              <label htmlFor="nonAdmin">Non-Admin</label>
             </div>
           ) : (
             ''
