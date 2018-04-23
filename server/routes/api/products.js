@@ -7,6 +7,17 @@ module.exports = router
 // send back confirmation on product being deleted instead of sending back the deleted product
 // and correct status code
 
+router.post('/addtocart', (req, res, next) => {
+  const productToAdd = req.body
+  req.session.cart.push(productToAdd)
+  console.log(req.session.cart.length)
+  res.status(201).json({ msg: `${productToAdd.name} has been added!` })
+})
+
+router.delete('/removefromcart', (req, res, next) => {
+
+}) 
+
 router.get('/category/:category', async (req, res, next) => {
   try {
     const category = req.params.category

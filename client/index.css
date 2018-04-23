@@ -61,11 +61,17 @@ li {
 }
 
 .ImgContainer {
+  cursor: pointer;
   margin: 50px;
   margin-top: 10px;
 }
 
 .ProductContainer {
+  cursor: pointer;
   margin: 50px;
   margin-top: 0px;
+}
+
+button {
+  cursor: pointer;
 }
