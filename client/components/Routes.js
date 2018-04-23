@@ -9,6 +9,7 @@ import Orders from './Orders'
 import SingleOrder from './SingleOrder'
 import UserPage from './User/UserPage'
 import UserForm from './User/UserForm'
+import Cart from './Cart'
 
 const Routes = () => (
   <div id="ComponentContainer" className="fill-xy center-xy column">
@@ -21,6 +22,7 @@ const Routes = () => (
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/user/:userId" component={UserPage} />
+      <Route path="/cart" component={Cart} />
       <Route component={NoMatch} />
     </Switch>
   </div>

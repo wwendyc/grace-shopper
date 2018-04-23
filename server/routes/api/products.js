@@ -7,6 +7,22 @@ module.exports = router
 // send back confirmation on product being deleted instead of sending back the deleted product
 // and correct status code
 
+router.post('/addtocart', (req, res, next) => {
+  try {
+    const productToAdd = req.body
+    req.session.cart.push(productToAdd)
+    console.log(req.session.cart.length)
+    res.status(201).json({ msg: `${productToAdd.name} has been added!` })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ msg: 'There was an error adding this item to your cart, please try again.'})
+  }
+})
+
+router.delete('/removefromcart', (req, res, next) => {
+
+}) 
+
 router.get('/category/:category', async (req, res, next) => {
   try {
     const category = req.params.category
@@ -90,7 +106,7 @@ router.get('/', async (req, res, next) => {
     const allProducts = await Product.findAll({
       include: [{model: Review, include: [User]}, {model: Category}]
     })
-    if (allProducts.length > 0) res.json(allProducts)
+    if (allProducts.length > 0) res.json({products: allProducts, cart: req.session.cart})
     else res.status(404).send('No products found!')
   } catch (error) {
     next(error)

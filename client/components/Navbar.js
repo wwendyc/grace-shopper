@@ -7,6 +7,7 @@ const Navbar = () => (
     <Link to='/'><img id='logo' src='/favicon.ico' /></Link>
     <Link to='/login'>Login</Link>
     <Link to='/signup'>Signup</Link>
+    <Link to='/cart'>Cart</Link>
     <AuthLink to='/home'>Home</AuthLink>
     <AuthLink to='/'><Logout /></AuthLink>
   </nav>
