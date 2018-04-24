@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class UserInfo extends Component {
+export class UserInfo extends Component {
   render() {
     const { id, name, email, orders } = this.props.targetUser
     return (
