@@ -36,8 +36,8 @@ export const Products = (props) => {
                 </ul>
               </div>
               <div style={{ display: "flex", justifyContent: "center"}}>
--                <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
--              </div>
+               <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
+              </div>
             </div>
           )
         })
