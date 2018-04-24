@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -6,36 +6,23 @@ import { addOrder } from '../store/orders'
 import { setProduct } from '../store/product'
 
 const Checkout = (props) => {
-  const { user, onSubmit, setProduct } = props
-  // get order from cart session
-  const cart = {
-    products: [
-      {
-        id: 1,
-        name: `Sulley's thunder roar`,
-        imgUrl: 'https://www.conmishijos.com/assets/posts/0000/551-personajes-de-la-pelicula-monsters-university-sulley.jpg',
-        quantity: 2,
-        price: 150,
-        subtotal: 300
-      },
-      {
-        id: 2,
-        name: 'Scary tactics with Mike Wazowski',
-        imgUrl: 'http://cinemabh.com/wp-content/uploads/2013/02/Universidade-Monstros-Mike-Wazowski-poster.jpg',
-        quantity: 3,
-        price: 101.75,
-        subtotal: 305.25
-      }
-    ],
-    totalPrice: 605.25,
-  }
+  const { cart, user, onSubmit, setProduct } = props
+  let cartList = (Object.keys(cart).length === 0) ? [] : Object.values(cart)
+  let totalPrice = 0
+
+  cartList = cartList.map(product => {
+    const subtotal = product.price * product.quantity
+    totalPrice += subtotal
+
+    return {...product, subtotal}
+  });
 
   return (
     <div>
       <ul>
         <li>Items:
         {
-          cart.products.map(product => {
+          cartList.map(product => {
             return (
               <div key={product.id}>
                 <img src={product.imgUrl} />
@@ -56,7 +43,7 @@ const Checkout = (props) => {
           })
         }
         </li>
-        <li>Total: {cart.totalPrice}</li>
+        <li>Total: {totalPrice}</li>
       </ul>
       <form onSubmit={onSubmit}>
         <div>
@@ -96,7 +83,11 @@ const Checkout = (props) => {
           />
         </div>
         <div>
-          <button type='submit'>Checkout</button>
+          <button
+            type='submit'
+            disabled={(Object.keys(cart).length === 0) ? 'disabled' : ''}
+            >Submit
+          </button>
         </div>
       </form>
     </div>
@@ -104,6 +95,7 @@ const Checkout = (props) => {
 }
 
 const mapState = (state) => ({
+  cart: state.cart.cart,
   user: state.user
 })
 
@@ -112,30 +104,12 @@ const mapDispatch = (dispatch) => ({
     event.preventDefault();
     const { address, city, state, zipCode, email} = event.target
 
+    // products & totalPrice from cart in orders thunk
     const order = {
-      products: [
-        {
-          id: 1,
-          name: `Sulley's thunder roar`,
-          imgUrl: 'https://www.conmishijos.com/assets/posts/0000/551-personajes-de-la-pelicula-monsters-university-sulley.jpg',
-          quantity: 2,
-          price: 150,
-          subtotal: 300
-        },
-        {
-          id: 2,
-          name: 'Scary tactics with Mike Wazowski',
-          imgUrl: 'http://cinemabh.com/wp-content/uploads/2013/02/Universidade-Monstros-Mike-Wazowski-poster.jpg',
-          quantity: 3,
-          price: 101.75,
-          subtotal: 305.25
-        }
-      ], // from cart
       address: `${address.value}, ${city.value}, ${state.value} ${zipCode.value}`,
       email: email.value,
       status: 'Created',
-      checkoutDate: Date.now(),
-      totalPrice: 605.25 // from cart?
+      checkoutDate: Date.now()
     }
 
     dispatch(addOrder(order))

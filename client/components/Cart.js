@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {getProducts} from '../store/product'
 import {getCart, removeFromCart} from '../store/cart'
 
@@ -33,6 +34,7 @@ const Cart = props => {
           cartList.map(e => e.price * e.quantity)
             .reduce((a,b) => a + b)
         }</span>
+        <Link to='/checkout'>Checkout</Link>
       </div>
     )
   }
