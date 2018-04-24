@@ -34,14 +34,10 @@ const Cart = props => {
           cartList.map(e => e.price * e.quantity)
             .reduce((a,b) => a + b)
         }</span>
-<<<<<<< HEAD
-        <Link to='/checkout'>Checkout</Link>
-=======
         <div>
           <button style={{margin: "10px"}} onClick={() => continueShopping()}>Continue Shopping</button>
           <button style={{margin: "10px"}} onClick={() => continueToCheckout()}>Continue To Checkout</button>
         </div>
->>>>>>> master
       </div>
     )
   }
