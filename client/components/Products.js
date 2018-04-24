@@ -6,28 +6,37 @@ import { getCart, addToCart } from  '../store/cart'
 
 
 export const Products = (props) => {
-  
-  const  {products, setProduct, addToCart} = props
+
+  const  {products, setProduct, addToCart, avgReviews} = props
 
   return (
     <div className='ProductsContainer'>
       {
         products.map(product => {
           return (
-            <div key={product.id} >
-              <div className='ImgContainer' onClick={() => setProduct(product)}>
+            <div key={product.id}>
+              <div className='ImgContainer'  onClick={() => setProduct(product)}>
                 <img src={product.imgUrl} />
               </div>
-              <div className='ProductContainer' onClick={() => setProduct(product)}>
+              <div className='ProductContainer'  onClick={() => setProduct(product)}>
                 <ul>
                   <li className='mainli'>Name: {product.name}</li>
                   <li className='mainli'>Description: {product.description}</li>
                   <li className='mainli'>Price: ${product.price}</li>
                   <li>Quantity in stock: {product.inventoryQuantity}</li>
+                  <li>Average Rating: {
+                    avgReviews.find((avgReview) => {
+                      return avgReview.id === product.id}).avgRating
+                    ?
+                     (Math.ceil(avgReviews.find((avgReview) => {
+                      return avgReview.id === product.id}).avgRating * Math.pow(10, 2)) / Math.pow(10, 2))
+                    :
+                      'Not yet rated'
+                  }</li>
                 </ul>
               </div>
               <div style={{ display: "flex", justifyContent: "center"}}>
-                <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
+               <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
               </div>
             </div>
           )
@@ -40,6 +49,7 @@ export const Products = (props) => {
 const mapState = state => {
   return {
     products: state.product.products,
+    avgReviews: state.product.avgReviews
   }
 }
 
