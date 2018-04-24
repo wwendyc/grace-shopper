@@ -53,16 +53,16 @@ export class Review extends React.Component {
           (Object.keys(this.props.state.user).length !== 0 )
           ?
             <div>
-                <label><input type='"radio"' value="1"
+                <label><input type="radio" value="1"
                       checked={this.state.rating === '1' }
                       onChange={this.handleOptionChange} />1</label>
-                <label><input type='"radio"' value="2"
+                <label><input type="radio" value="2"
                       checked={this.state.rating === '2'}
                       onChange={this.handleOptionChange} />2</label>
-                <label><input type='"radio"' value="3"
+                <label><input type="radio" value="3"
                       checked={this.state.rating === '3'}
                       onChange={this.handleOptionChange} />3</label>
-                <label><input type='"radio"' value="4"
+                <label><input type="radio" value="4"
                       checked={this.state.rating === '4'}
                       onChange={this.handleOptionChange}  />4</label>
                 <label><input type='"radio"' value="5"
