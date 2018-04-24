@@ -31,6 +31,7 @@ class SearchBar extends Component {
     const { products, setProduct } = this.props
     const fuse = new Fuse(products, options)
     const result = fuse.search(this.state.query)
+    history.push('/', {searchResults: results})
     console.log('search result ', result)
     return (
       <div>
@@ -44,7 +45,7 @@ const mapState = state => ({
   products: state.product.products
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch, ownProps) => ({
   getProducts: dispatch(getProducts()),
   setProduct: product => {
     event.preventDefault()

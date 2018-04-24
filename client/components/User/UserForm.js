@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { updateUser } from '../../store/users'
 
-class UserForm extends Component {
+export class UserForm extends Component {
   constructor() {
     super()
     this.state = {

@@ -8,7 +8,7 @@ import UserInfo from './UserInfo'
 import UserForm from './UserForm'
 import Orders from '../Orders'
 
-class UserPage extends Component {
+export class UserPage extends Component {
   componentDidMount() {
     const userId = +this.props.match.params.userId
     this.props.singleUserData(userId)
