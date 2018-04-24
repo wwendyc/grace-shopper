@@ -9,9 +9,9 @@ import SearchResults from './SearchResults'
 import Prodcts, { Products } from './Products'
 import history from '../history'
 
-class SearchBar extends Component {
-  constructor() {
-    super()
+export class SearchBar extends Component {
+  constructor(props) {
+    super(props)
     this.state = {
       query: '',
     }
@@ -42,7 +42,7 @@ class SearchBar extends Component {
   }
 
   render() {
-
+    console.log('this.props ', this)
     return (
       <div>
         <input
@@ -55,11 +55,12 @@ class SearchBar extends Component {
   }
 }
 
-const mapState = state => ({
-  products: state.product.products
+const mapState = (state, ownProps) => ({
+  products: state.product.products,
+  ownProps
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch, ownProps) => ({
   getProducts: dispatch(getProducts()),
   setProduct: product => {
     event.preventDefault()
