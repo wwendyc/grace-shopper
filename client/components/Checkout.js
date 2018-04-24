@@ -103,10 +103,14 @@ const mapDispatch = (dispatch) => ({
   onSubmit: event => {
     event.preventDefault();
     const { address, city, state, zipCode, email} = event.target
+    const addressStr =
+      (address.value && city.value && state.value && zipCode.value)
+        ? `${address.value}, ${city.value}, ${state.value} ${zipCode.value}`
+        : ''
 
     // products & totalPrice from cart in orders thunk
     const order = {
-      address: `${address.value}, ${city.value}, ${state.value} ${zipCode.value}`,
+      address: addressStr,
       email: email.value,
       status: 'Created',
       checkoutDate: Date.now()
