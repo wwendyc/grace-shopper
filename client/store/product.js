@@ -51,7 +51,7 @@ export default (state = initialState, action) => {
     return {...state, products: action.products}
   case SELECT_PRODUCT:
     return {...state, selectedProduct: action.product}
-  case ADDED_REVIEW:
+  case ADDED_REVIEW: 
     return {...state, selectedProduct: {...state.selectedProduct, reviews: [...state.selectedProduct.reviews, action.review]}}
   default:
     return state

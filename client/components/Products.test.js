@@ -1,12 +1,12 @@
 /* eslint-env mocha,chai */
-process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
+// process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
 
 import {Provider} from 'react-redux'
 import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow, mount, render} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { Products } from './Products'
+import Products from './Products'
 
 const adapter = new Adapter()
 const disableLifecycleMethods = true
