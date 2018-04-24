@@ -23,10 +23,7 @@ export class SingleProduct extends React.Component {
     const categories = this.props.selectedProduct.categories || []
     const reviews = this.props.selectedProduct.reviews || []
     const {addToCart} = this.props
-    // const product =  selectedProduct || {};
-    // const categories = selectedProduct.categories || []
-    // const reviews = selectedProduct.reviews || []
-    // console.log(this.props.selectedProduct)
+
     return (
       <div  id="SingleProductContainer">
         <div  className="ImgContainer"><img src={product.imgUrl} /></div>
