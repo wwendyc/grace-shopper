@@ -49,17 +49,17 @@ describe('UserPage', () => {
   })
 })
 
-describe('UserInfo', () => {
-  let UserPageWrapper
+// describe('UserInfo', () => {
+//   let UserPageWrapper
 
-  beforeEach('create <UserPage /> wrapper', () => {
-    UserPageWrapper = shallow(<UserPage targetUser={state.targetUser} user={state.user} />)
-    const UserInfoWrapper = UserPageWrapper.find(UserInfo)
-  })
+//   beforeEach('create <UserPage /> wrapper', () => {
+//     UserPageWrapper = shallow(<UserPage targetUser={state.targetUser} user={state.user} />)
+//     const UserInfoWrapper = UserPageWrapper.find(UserInfo)
+//   })
 
-  describe('renders the targetUser props it receives', () => {
-    it('includes the user name as a header', () => {
-      expect(UserInfoWrapper.find('h1')).to.have.html('<h1>Hello, Cody</h1>')
-    })
-  })
-})
+//   describe('renders the targetUser props it receives', () => {
+//     it('includes the user name as a header', () => {
+//       expect(UserInfoWrapper.find('h1')).to.have.html('<h1>Hello, Cody</h1>')
+//     })
+//   })
+// })
