@@ -20,6 +20,7 @@ const Routes = () => (
       <Route path="/orders" component={Orders} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/search-results" component={Products} />
       <Route path="/user/:userId" component={UserPage} />
       <Route component={NoMatch} />
     </Switch>

@@ -41,6 +41,7 @@ class UserForm extends Component {
     const { id, name, email } = this.props.targetUser
     const { isAdmin } = this.props.user
     const password = ''
+    console.log(this.state.isAdmin)
     // TODO: add validataion
     return (
       <div className="userForm">
