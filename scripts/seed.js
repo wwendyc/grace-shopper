@@ -38,7 +38,6 @@ const seed = async () => {
 
   const orders = await Promise.all([
     Order.create({
-      id: 1,
       products: [
         {
           id: 1,
@@ -66,7 +65,6 @@ const seed = async () => {
       userId: 1
     }),
     Order.create({
-      id: 2,
       products: [
         {
           id: 3,

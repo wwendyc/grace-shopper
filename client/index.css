@@ -45,7 +45,12 @@ nav a:first-child:hover {
   width: 100%
 }
 
-#ProductsContainer {
+.OrderContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.ProductsContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -62,16 +67,23 @@ img {
   width: 300px;
 }
 
-li {
+.mainli {
   width: 300px;
 }
 
 .ImgContainer {
+  cursor: pointer;
   margin: 50px;
   margin-top: 10px;
 }
 
 .ProductContainer {
+  cursor: pointer;
   margin: 50px;
   margin-top: 0px;
 }
+
+button {
+  cursor: pointer;
+}
+

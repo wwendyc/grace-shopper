@@ -1,5 +1,5 @@
 /* eslint-env mocha,chai */
-process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
+// process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
 
 import {Provider} from 'react-redux'
 import {expect} from 'chai'
