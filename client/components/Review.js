@@ -65,7 +65,7 @@ export class Review extends React.Component {
                 <label><input type="radio" value="4"
                       checked={this.state.rating === '4'}
                       onChange={this.handleOptionChange}  />4</label>
-                <label><input type='"radio"' value="5"
+                <label><input type="radio" value="5"
                       checked={this.state.rating === '5'}
                       onChange={this.handleOptionChange} />5</label>
               <textarea name="review" onChange={this.handleChange} value={this.state.review} />
