@@ -2,32 +2,26 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getProducts, setProduct } from '../store/product'
-import { getCart, addToCart } from  '../store/cart'
 
 
 export const Products = (props) => {
-<<<<<<< HEAD
 
   const  {products, setProduct, avgReviews} = props
-=======
-  
-  const  {products, setProduct, addToCart} = props
->>>>>>> master
 
   return (
-    <div className='ProductsContainer'>
+    <div id='ProductsContainer'>
       {
         products.map(product => {
           return (
-            <div key={product.id} >
-              <div className='ImgContainer' onClick={() => setProduct(product)}>
+            <div key={product.id} onClick={() => setProduct(product)}>
+              <div className='ImgContainer'>
                 <img src={product.imgUrl} />
               </div>
-              <div className='ProductContainer' onClick={() => setProduct(product)}>
+              <div className='ProductContainer'>
                 <ul>
-                  <li className='mainli'>Name: {product.name}</li>
-                  <li className='mainli'>Description: {product.description}</li>
-                  <li className='mainli'>Price: ${product.price}</li>
+                  <li>Name: {product.name}</li>
+                  <li>Description: {product.description}</li>
+                  <li>Price: ${product.price}</li>
                   <li>Quantity in stock: {product.inventoryQuantity}</li>
                   <li>Average Rating: {
                     avgReviews.find((avgReview) => {
@@ -39,9 +33,6 @@ export const Products = (props) => {
                       'Not yet rated'
                   }</li>
                 </ul>
-              </div>
-              <div style={{ display: "flex", justifyContent: "center"}}>
-                <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
               </div>
             </div>
           )
@@ -65,12 +56,6 @@ const mapDispatch = (dispatch, ownProps) => {
       event.preventDefault()
       dispatch(setProduct(product))
       ownProps.history.push('/single-product')
-    },
-    addToCart: (event) => {
-      event.preventDefault()
-      const id = event.target.id
-      dispatch(addToCart(id))
-      ownProps.history.push('/cart')
     }
   }
 }

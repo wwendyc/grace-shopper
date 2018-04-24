@@ -31,7 +31,7 @@ const seed = async () => {
     Review.create({review: 'Seriously, take this class!', rating: 5, productId: 5, userId: 1  }),
     Review.create({review: 'Thanks to these lessons, I feel like I can scare anyone!', rating: 4, productId: 4, userId: 1  }),
     Review.create({review: 'Loved the class but oops wrong rating.', rating: 1, productId: 3, userId: 1  }),
-    Review.create({review: 'Loved the class but oops wrong rating.', rating: 5, productId: 6, userId: 1  })
+    Review.create({review: 'Well....Nah...', rating: 5, productId: 6, userId: 1  })
   ])
 
   console.log(`seeded ${reviews.length} reviews`)

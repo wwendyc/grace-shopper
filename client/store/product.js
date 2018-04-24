@@ -3,10 +3,6 @@ import axios from 'axios'
 const initialState = {
   products: [],
   selectedProduct: {},
-<<<<<<< HEAD
-  avgReviews: []
-=======
->>>>>>> master
 }
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
@@ -28,17 +24,8 @@ export const getProducts = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/products')
     const products = res.data
-<<<<<<< HEAD
-
-    const resRev = await axios.get('/api/products/avgReviews')
-    const avgReviews = resRev.data
-
-    dispatch(getProductsAction(products, avgReviews))
-  } catch (error) { console.log(error) } // redirect to error page instead of just console logging.
-=======
     dispatch(getProductsAction(products))
   } catch (error) { console.log(error) }
->>>>>>> master
 }
 
 export const setProduct = (product) => (dispatch) => {
