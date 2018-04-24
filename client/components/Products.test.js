@@ -6,7 +6,7 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow, mount, render} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import Products from './Products'
+import { Products } from './Products'
 
 const adapter = new Adapter()
 const disableLifecycleMethods = true

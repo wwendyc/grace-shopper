@@ -5,7 +5,7 @@ import { getProducts, setProduct } from '../store/product'
 import { getCart, addToCart } from  '../store/cart'
 
 
-const Products = (props) => {
+export const Products = (props) => {
   
   const  {products, setProduct, addToCart} = props
 
