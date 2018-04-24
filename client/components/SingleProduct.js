@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Review from './Review'
+import {addToCart } from  '../store/cart'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ export class SingleProduct extends React.Component {
     const product =  this.props.selectedProduct || {};
     const categories = this.props.selectedProduct.categories || []
     const reviews = this.props.selectedProduct.reviews || []
+    const {addToCart} = this.props
     // const product =  selectedProduct || {};
     // const categories = selectedProduct.categories || []
     // const reviews = selectedProduct.reviews || []
@@ -49,14 +51,13 @@ export class SingleProduct extends React.Component {
           <Review reviews = {reviews} />
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor= "quantity"> Enter quantity </label>
           <input type= "text" name ="quantity" value={this.state.quantity} onChange={this.handleChange} />
-        </div>
+        </div> */}
 
         <div>
-          <button>Add To Cart </button>
-          {/* <button onClick={() => this.props.addProductToCart(product)}>Add To Cart </button> */}
+        <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
         </div>
       </div>
     )
@@ -69,9 +70,14 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch,  ownProps) => {
   return {
-    // addToCart: (product) => dispatch(addToCart(product)),
+    addToCart: (event) => {
+      event.preventDefault()
+      const id = event.target.id
+      dispatch(addToCart(id))
+      ownProps.history.push('/cart')
+    }
   }
 }
 
