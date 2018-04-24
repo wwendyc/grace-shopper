@@ -23,6 +23,7 @@ const Routes = () => (
       <Route path="/checkout" component={Checkout} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/search-results" component={Products} />
       <Route path="/user/:userId" component={UserPage} />
       <Route path="/cart" component={Cart} />
       <Route component={NoMatch} />

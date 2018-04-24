@@ -20,6 +20,13 @@ class UserForm extends Component {
     })
   }
 
+  handleRadioChange = evt => {
+    const isAdmin = evt.target.value === 'true' ? true : false
+    this.setState({
+      isAdmin
+    })
+  }
+
   handleSubmit = evt => {
     evt.preventDefault()
     const newInfo = Object.keys(this.state).reduce((obj, key) => {
@@ -34,6 +41,7 @@ class UserForm extends Component {
     const { id, name, email } = this.props.targetUser
     const { isAdmin } = this.props.user
     const password = ''
+    console.log(this.state.isAdmin)
     // TODO: add validataion
     return (
       <div className="userForm">
@@ -65,24 +73,28 @@ class UserForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          {isAdmin ? (
+          {isAdmin || !isAdmin ? (
             <div>
               <p>Admin status: </p>
-              <input
-                type="radio"
-                id="admin"
-                name="admin"
-                onChange={this.handleChange}
-              />
-              <label htmlFor="admin">Admin</label>
+              <label htmlFor="admin">
+                <input
+                  name="adminStatus"
+                  type="radio"
+                  value="true"
+                  onChange={this.handleRadioChange}
+                />
+                Admin
+              </label>
 
-              <input
-                type="radio"
-                id="nonAdmin"
-                name="admin"
-                onChange={this.handleChange}
-              />
-              <label htmlFor="nonAdmin">Non-Admin</label>
+              <label htmlFor="nonAdmin">
+                <input
+                  name="adminStatus"
+                  type="radio"
+                  value="false"
+                  onChange={this.handleRadioChange}
+                />
+                Non-Admin
+              </label>
             </div>
           ) : (
             ''

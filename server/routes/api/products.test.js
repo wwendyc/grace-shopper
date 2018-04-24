@@ -36,7 +36,7 @@ describe('Product routes', () => {
   })
 
   describe('/api/products', () => {
-  
+
     it('GET /api/products - returns all products', async () => {
       await request(app)
         .get('/api/products')
@@ -61,7 +61,7 @@ describe('Product routes', () => {
         expect(res.body.msg).to.be.equal('Monitor has been added!')
         expect(res.body).to.be.an('object')
       })
-    
+
     await request(app)
       .get('/api/products')
       .expect(200)
@@ -98,7 +98,7 @@ describe('Product routes', () => {
         expect(res.body.msg).to.be.equal('Product was deleted!')
         expect(res.body).to.be.an('object')
       })
-    
+
     await request(app)
       .get('/api/products')
       .expect(200)
