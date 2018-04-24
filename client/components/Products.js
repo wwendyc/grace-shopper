@@ -6,7 +6,7 @@ import { getProducts, setProduct } from '../store/product'
 
 export const Products = (props) => {
 
-  const  {products, setProduct} = props
+  const  {products, setProduct, avgReviews} = props
 
   return (
     <div id='ProductsContainer'>
@@ -23,6 +23,15 @@ export const Products = (props) => {
                   <li>Description: {product.description}</li>
                   <li>Price: ${product.price}</li>
                   <li>Quantity in stock: {product.inventoryQuantity}</li>
+                  <li>Average Rating: {
+                    avgReviews.filter((avgReview) => {
+                      return avgReview.id === product.id})[0].avgRating
+                    ?
+                     (Math.ceil(avgReviews.filter((avgReview) => {
+                      return avgReview.id === product.id})[0].avgRating * Math.pow(10, 2)) / Math.pow(10, 2))
+                    :
+                      'Not yet rated'
+                  }</li>
                 </ul>
               </div>
             </div>
@@ -36,6 +45,7 @@ export const Products = (props) => {
 const mapState = state => {
   return {
     products: state.product.products,
+    avgReviews: state.product.avgReviews
   }
 }
 

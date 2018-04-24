@@ -26,11 +26,12 @@ const seed = async () => {
   console.log(`seeded ${products.length} products`)
 
   const reviews = await Promise.all([
-    Review.create({review: 'Best scaring class I\'ve ever taken!!', rating: 5 }),
-    Review.create({review: 'I\'d give this course 10 stars if I could!', rating: 5 }),
-    Review.create({review: 'Seriously, take this class!', rating: 5 }),
-    Review.create({review: 'Thanks to these lessons, I feel like I can scare anyone!', rating: 4 }),
-    Review.create({review: 'Loved the class but oops wrong rating.', rating: 1 })
+    Review.create({review: 'Best scaring class I\'ve ever taken!!', rating: 5, productId: 2, userId: 1 }),
+    Review.create({review: 'I\'d give this course 10 stars if I could!', rating: 5, productId: 2, userId: 2  }),
+    Review.create({review: 'Seriously, take this class!', rating: 5, productId: 5, userId: 1  }),
+    Review.create({review: 'Thanks to these lessons, I feel like I can scare anyone!', rating: 4, productId: 4, userId: 1  }),
+    Review.create({review: 'Loved the class but oops wrong rating.', rating: 1, productId: 3, userId: 1  }),
+    Review.create({review: 'Loved the class but oops wrong rating.', rating: 5, productId: 6, userId: 1  })
   ])
 
   console.log(`seeded ${reviews.length} reviews`)

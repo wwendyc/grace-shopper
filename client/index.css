@@ -51,6 +51,12 @@ nav a:first-child:hover {
   flex-wrap: wrap;
 }
 
+#SingleProductContainer {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+}
+
 img {
   height: 300px;
   width: 300px;

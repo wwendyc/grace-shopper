@@ -44,12 +44,12 @@ export class SingleProduct extends React.Component {
     // const reviews = selectedProduct.reviews || []
     // console.log(this.props.selectedProduct)
     return (
-      <div>
-        <div><img src={product.imgUrl} /></div>
+      <div  id='SingleProductContainer'>
+        <div  className="ImgContainer"><img src={product.imgUrl} /></div>
         <div> Product Name: {product.name}</div>
         <div> Discription: {product.description}</div>
 
-        <div>Categories for Product:<ul> {
+        <div>Categories for Product:<div  className='ProductContainer'><ul> {
             (categories.length)
             ?
             categories.map(category => (
@@ -59,7 +59,7 @@ export class SingleProduct extends React.Component {
               ))
             :
               <div>No categories for this</div>
-        } </ul> </div>
+        } </ul> </div></div>
 
         <div> Price ${product.price}</div>
 
