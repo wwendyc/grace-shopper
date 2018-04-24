@@ -1,5 +1,5 @@
 /* eslint-env mocha,chai */
-process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
+// process.env.DATABASE_URL='postgres://localhost/grace-shopper-test'
 
 import {Provider} from 'react-redux'
 import {expect} from 'chai'
@@ -15,12 +15,21 @@ enzyme.configure({
   disableLifecycleMethods
 })
 
-const state = { products: [{
-  name: 'Name',
-  description: 'Desc',
-  price: 99,
-  inventoryQuantity: 1,
-}] }
+const state = {
+  products: [{
+    id: 1,
+    name: 'Name',
+    description: 'Desc',
+    price: 99,
+    inventoryQuantity: 1,
+  }],
+  avgReviews: [{
+    id: 1,
+    name: 'Art',
+    avgRating: 4,
+    productId: 1
+  }]
+}
 
 describe('Products', () => {
   const resolves = () => Promise.resolve('Oh yeah')

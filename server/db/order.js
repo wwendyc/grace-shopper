@@ -14,6 +14,12 @@ const Order = db.define('order', {
       notEmpty: true
     }
   },
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
   status: {
     type: Sequelize.ENUM(
       'Created',

@@ -7,8 +7,10 @@ import NoMatch from './NoMatch'
 import SingleProduct from './SingleProduct'
 import Orders from './Orders'
 import SingleOrder from './SingleOrder'
+import Checkout from './Checkout'
 import UserPage from './User/UserPage'
 import UserForm from './User/UserForm'
+import Cart from './Cart'
 
 const Routes = () => (
   <div id="ComponentContainer" className="fill-xy center-xy column">
@@ -18,10 +20,12 @@ const Routes = () => (
       <Route path="/single-product" component={SingleProduct} />
       <Route path="/orders/:id" component={SingleOrder} />
       <Route path="/orders" component={Orders} />
+      <Route path="/checkout" component={Checkout} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/search-results" component={Products} />
       <Route path="/user/:userId" component={UserPage} />
+      <Route path="/cart" component={Cart} />
       <Route component={NoMatch} />
     </Switch>
   </div>

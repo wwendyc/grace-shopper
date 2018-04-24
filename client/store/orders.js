@@ -4,7 +4,6 @@
 const GET_ORDERS = 'GET_ORDERS'
 const ADD_ORDER = 'ADD_ORDER'
 const UPDATE_ORDER = 'UPDATE_ORDER'
-const REMOVE_ORDER = 'REMOVE_ORDER'
 const SET_ORDER = 'SET_ORDER'
 
 /**
@@ -28,14 +27,10 @@ const add = (order) => ({
   order
 })
 
+// Future Feature: Admin update order status | User cancel order
 const update = (order) => ({
   type: UPDATE_ORDER,
   order
-})
-
-const remove = (orderId) => ({
-  type: REMOVE_ORDER,
-  orderId
 })
 
 export const setOrder = (order) => ({
@@ -61,6 +56,27 @@ export const getOrders = () => {
 export const addOrder = (order) => {
   return async (dispatch, getState, { axios, history }) => {
     try {
+      const { cart, user } = getState()
+      let cartList = (Object.keys(cart.cart).length === 0) ? [] : Object.values(cart.cart)
+      let totalPrice = 0
+
+      cartList = cartList.map(product => {
+        const subtotal = product.price * product.quantity
+        totalPrice += subtotal
+
+        return {...product, subtotal}
+      });
+
+      order = {
+        ...order,
+        products: cartList,
+        totalPrice
+      }
+
+      if (user.id) {
+        order = {...order, userId: user.id}
+      }
+
       const { data } = await axios.post('/api/orders', order);
       dispatch(add(data));
 
@@ -72,6 +88,7 @@ export const addOrder = (order) => {
   }
 }
 
+// Future Feature: Admin update order status | User cancel order
 export const updateOrder = (order) => {
   return async (dispatch, getState, { axios, history }) => {
     try {
@@ -82,20 +99,6 @@ export const updateOrder = (order) => {
     }
     catch (error) {
       console.error(`Attempt to update order with id ${order.id} has failed`, error);
-    }
-  }
-}
-
-export const removeOrder = (orderId) => {
-  return async (dispatch, getState, { axios, history }) => {
-    try {
-      await axios.delete(`/api/orders/${orderId}`);
-      dispatch(remove(orderId));
-
-      history.push('/orders')
-    }
-    catch (error) {
-      console.error(`Attempt to remove order with id ${orderId} has failed`, error);
     }
   }
 }
@@ -118,6 +121,7 @@ export default (state = initialState, action) => {
         selected: action.order
       }
 
+    // Future Feature: Admin update order status | User cancel order
     case UPDATE_ORDER: {
       const list = state.list.map(order => {
         if (order.id === action.order.id) {
@@ -131,18 +135,6 @@ export default (state = initialState, action) => {
         ...state,
         list,
         selected: action.order
-      }
-    }
-
-    case REMOVE_ORDER: {
-      const list = state.list.filter(order => {
-        return order.id !== action.orderId
-      })
-
-      return {
-        ...state,
-        list,
-        selected: {}
       }
     }
 

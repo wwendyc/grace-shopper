@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Review from './Review'
+import {addToCart } from  '../store/cart'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -18,38 +19,18 @@ export class SingleProduct extends React.Component {
 
 
   render(){
-    // const selectedProduct = {
-    //   id: 1,
-    //   name: "Sully's thunder roar",
-    //   description: 'BootCamp it is!!!',
-    //   price: 100,
-    //   imgUrl: '',
-    //   reviews: [{
-    //     review: 'excellent',
-    //     rating: 4
-    //   },
-    //   {
-    //     review: 'OutStanding',
-    //     rating: 5
-    //   }],
-    //   categories: [{
-    //     name: 'Remote'
-    //   }]
-    // }
     const product =  this.props.selectedProduct || {};
     const categories = this.props.selectedProduct.categories || []
     const reviews = this.props.selectedProduct.reviews || []
-    // const product =  selectedProduct || {};
-    // const categories = selectedProduct.categories || []
-    // const reviews = selectedProduct.reviews || []
-    // console.log(this.props.selectedProduct)
+    const {addToCart} = this.props
+
     return (
-      <div>
-        <div><img src={product.imgUrl} /></div>
+      <div  id="SingleProductContainer">
+        <div  className="ImgContainer"><img src={product.imgUrl} /></div>
         <div> Product Name: {product.name}</div>
         <div> Discription: {product.description}</div>
 
-        <div>Categories for Product:<ul> {
+        <div>Categories for Product:<div  className="ProductContainer"><ul> {
             (categories.length)
             ?
             categories.map(category => (
@@ -59,7 +40,7 @@ export class SingleProduct extends React.Component {
               ))
             :
               <div>No categories for this</div>
-        } </ul> </div>
+        } </ul> </div></div>
 
         <div> Price ${product.price}</div>
 
@@ -67,14 +48,13 @@ export class SingleProduct extends React.Component {
           <Review reviews = {reviews} />
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor= "quantity"> Enter quantity </label>
           <input type= "text" name ="quantity" value={this.state.quantity} onChange={this.handleChange} />
-        </div>
+        </div> */}
 
         <div>
-          <button>Add To Cart </button>
-          {/* <button onClick={() => this.props.addProductToCart(product)}>Add To Cart </button> */}
+        <button id={product.id} onClick={event => addToCart(event)}>Add To Cart</button>
         </div>
       </div>
     )
@@ -87,9 +67,14 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch,  ownProps) => {
   return {
-    // addToCart: (product) => dispatch(addToCart(product)),
+    addToCart: (event) => {
+      event.preventDefault()
+      const id = event.target.id
+      dispatch(addToCart(id))
+      ownProps.history.push('/cart')
+    }
   }
 }
 
