@@ -5,8 +5,9 @@ import { getProducts, setProduct } from '../store/product'
 
 
 export const Products = (props) => {
-  console.log(props)
-  const  {products, setProduct} = props
+  const {setProduct} = props
+  let products = props.products
+  if (props.location.state) products = props.location.state.searchResults
 
   return (
     <div id='ProductsContainer'>

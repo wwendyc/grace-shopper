@@ -1,29 +1,30 @@
 import React, { Component } from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import { getProducts, setProduct } from '../store/product'
 
 import SearchResults from './SearchResults'
-import Prodcts from './Products'
+import Prodcts, { Products } from './Products'
+import history from '../history'
 
 class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
       query: '',
-      results: []
     }
   }
 
   handleInputChange = evt => {
     this.setState({
-      query: evt.target.value
+      query: evt.target.value,
     })
   }
 
-  render() {
+  handleSubmit = evt => {
+    evt.preventDefault()
     const options = {
       shouldSort: true,
       threshold: 0.6,
@@ -33,27 +34,22 @@ class SearchBar extends Component {
       minMatchCharLength: 1,
       keys: ['name', 'description']
     }
-    const { products, setProduct } = this.props
+    const { products } = this.props
     const fuse = new Fuse(products, options)
-    const result = fuse.search(this.state.query)
-    console.log('search result ', result)
+    const results = fuse.search(this.state.query)
+
+    history.push('/', { searchResults: results })
+  }
+
+  render() {
+
     return (
       <div>
-        <Switch>
-          <Route
-            path="/search-results"
-            render={() => {
-              <SearchResults searchResults={results} />
-            }}
-          />
-        </Switch>
         <input
           placeholder="I'm looking for..."
           onChange={this.handleInputChange}
         />
-        <Link to="/search-results">
-          <button>Search</button>
-        </Link>
+        <button onClick={this.handleSubmit}>Search</button>
       </div>
     )
   }
