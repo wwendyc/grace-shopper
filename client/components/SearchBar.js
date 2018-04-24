@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
+import { Link, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import { getProducts, setProduct } from '../store/product'
 
+import SearchResults from './SearchResults'
+import Prodcts from './Products'
+
 class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
-      query: ''
+      query: '',
+      results: []
     }
   }
 
@@ -34,7 +39,21 @@ class SearchBar extends Component {
     console.log('search result ', result)
     return (
       <div>
-        <input placeholder="I am looking for..." onChange={this.handleInputChange} />
+        <Switch>
+          <Route
+            path="/search-results"
+            render={() => {
+              <SearchResults searchResults={results} />
+            }}
+          />
+        </Switch>
+        <input
+          placeholder="I'm looking for..."
+          onChange={this.handleInputChange}
+        />
+        <Link to="/search-results">
+          <button>Search</button>
+        </Link>
       </div>
     )
   }

@@ -5,7 +5,7 @@ import { getProducts, setProduct } from '../store/product'
 
 
 export const Products = (props) => {
-
+  console.log(props)
   const  {products, setProduct} = props
 
   return (
