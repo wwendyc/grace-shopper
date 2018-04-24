@@ -15,19 +15,28 @@ enzyme.configure({
   disableLifecycleMethods
 })
 
-const state = { products: [{
-  name: 'Name',
-  description: 'Desc',
-  price: 99,
-  inventoryQuantity: 1,
-}] }
+const state = {
+  products: [{
+    id: 1,
+    name: 'Name',
+    description: 'Desc',
+    price: 99,
+    inventoryQuantity: 1,
+  }],
+  avgReviews: [{
+    id: 1,
+    name: 'Art',
+    avgRating: 4,
+    productId: 1
+  }]
+}
 
 describe('Products', () => {
   const resolves = () => Promise.resolve('Oh yeah')
   const rejects = () => Promise.reject(new Error('Oh noes'))
 
   it('Loads initial state', () => {
-    const wrapper = shallow(<Products products={state.products} />)
+    const wrapper = shallow(<Products products={state.products} avgReviews={state.avgReviews} />)
     expect(wrapper.find('li').at(0).text()).to.be.equal('Name: Name')
     expect(wrapper.find('li').someWhere(n => n.text().match(state.products[0].name))).to.be.equal(true)
   })

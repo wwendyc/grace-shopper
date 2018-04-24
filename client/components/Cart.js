@@ -6,7 +6,7 @@ import {getCart, removeFromCart} from '../store/cart'
 
 const Cart = props => {
 
-  const {cart, removeFromCart} = props
+  const {cart, removeFromCart, continueShopping, continueToCheckout} = props
   const cartList = (cart === undefined) ? [] : Object.values(cart)
 
   if (cartList.length > 0) {
@@ -34,24 +34,44 @@ const Cart = props => {
           cartList.map(e => e.price * e.quantity)
             .reduce((a,b) => a + b)
         }</span>
+<<<<<<< HEAD
         <Link to='/checkout'>Checkout</Link>
+=======
+        <div>
+          <button style={{margin: "10px"}} onClick={() => continueShopping()}>Continue Shopping</button>
+          <button style={{margin: "10px"}} onClick={() => continueToCheckout()}>Continue To Checkout</button>
+        </div>
+>>>>>>> master
       </div>
     )
   }
-  else return <div>Your cart is empty!</div>
+  else return (
+    <div>
+      <div>Your cart is empty!</div>
+      <button style={{margin: "10px"}}onClick={() => continueShopping()}>Continue Shopping</button>
+    </div>
+  )
 }
 
 const mapState = state => ({
   cart: state.cart.cart
 })
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     getCart: dispatch(getCart()),
     removeFromCart: (event) => {
       event.preventDefault()
       const id = event.target.id
       dispatch(removeFromCart(id))
+    },
+    continueShopping: () => {
+      event.preventDefault()
+      ownProps.history.push('/')
+    },
+    continueToCheckout: () => {
+      event.preventDefault()
+      ownProps.history.push('/checkout')
     }
   }
 }
