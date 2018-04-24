@@ -6,23 +6,19 @@ import moment from 'moment'
 import { setProduct } from '../store/product'
 
 const SingleOrder = (props) => {
-  const { orders } = props
+  const { orders, setProduct } = props
   const selectedOrder = orders.selected
 
   return (
-    <div>
-      <div>
-        <div>
-          <h1>Order #: {selectedOrder.id}</h1>
-          <h3>Date: {moment(selectedOrder.checkoutDate).format('LL')}</h3>
-        </div>
-        <div>
-          <h3>Status: {selectedOrder.status}</h3>
-          <h3>Total: ${selectedOrder.totalPrice.toFixed(2)}</h3>
-          <h4>Notifications Sent To: {selectedOrder.email}</h4>
-        </div>
+    <div id='SingleProductContainer'>
+      <div className='small-margin-container'>
+        <h1>Order #: {selectedOrder.id}</h1>
+        <h3>Date: {moment(selectedOrder.checkoutDate).format('LL')}</h3>
+        <h3>Status: {selectedOrder.status}</h3>
+        <h3>Total: ${selectedOrder.totalPrice.toFixed(2)}</h3>
+        <h4>Notifications Sent To: {selectedOrder.email}</h4>
       </div>
-      <div>
+      <div className='ProductsContainer'>
       {
         selectedOrder.products.map(product => {
           return (

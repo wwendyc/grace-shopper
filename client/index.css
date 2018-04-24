@@ -87,3 +87,6 @@ button {
   cursor: pointer;
 }
 
+.small-margin-container * {
+  margin: 5px 0px;
+}

@@ -18,33 +18,31 @@ const Checkout = (props) => {
   });
 
   return (
-    <div>
-      <ul>
-        <li>Items:
-        {
-          cartList.map(product => {
-            return (
-              <div key={product.id}>
-                <img src={product.imgUrl} />
-                <ul>
-                  <li>
-                    <Link
-                      to='/single-product'
-                      onClick={() => setProduct(product)}
-                      >{product.name}
-                    </Link>
-                  </li>
-                  <li>${product.price.toFixed(2)}</li>
-                  <li>Quantity: {product.quantity}</li>
-                  <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
-                </ul>
-              </div>
-            )
-          })
-        }
-        </li>
-        <li>Total: {totalPrice}</li>
-      </ul>
+    <div className='OrderContainer'>
+      <div className='ProductsContainer'>
+      {
+        cartList.map(product => {
+          return (
+            <div key={product.id}>
+              <img src={product.imgUrl} />
+              <ul>
+                <li>
+                  <Link
+                    to='/single-product'
+                    onClick={() => setProduct(product)}
+                    >{product.name}
+                  </Link>
+                </li>
+                <li>${product.price.toFixed(2)}</li>
+                <li>Quantity: {product.quantity}</li>
+                <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
+              </ul>
+            </div>
+          )
+        })
+      }
+      </div>
+      <h3>Total: ${totalPrice}</h3>
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor='address'>Address:</label>
