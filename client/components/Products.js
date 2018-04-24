@@ -24,11 +24,11 @@ export const Products = (props) => {
                   <li>Price: ${product.price}</li>
                   <li>Quantity in stock: {product.inventoryQuantity}</li>
                   <li>Average Rating: {
-                    avgReviews.filter((avgReview) => {
-                      return avgReview.id === product.id})[0].avgRating
+                    avgReviews.find((avgReview) => {
+                      return avgReview.id === product.id}).avgRating
                     ?
-                     (Math.ceil(avgReviews.filter((avgReview) => {
-                      return avgReview.id === product.id})[0].avgRating * Math.pow(10, 2)) / Math.pow(10, 2))
+                     (Math.ceil(avgReviews.find((avgReview) => {
+                      return avgReview.id === product.id}).avgRating * Math.pow(10, 2)) / Math.pow(10, 2))
                     :
                       'Not yet rated'
                   }</li>
