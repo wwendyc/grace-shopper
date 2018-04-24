@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import { getProducts, setProduct } from '../store/product'
 
-class SearchBar extends Component {
+import SearchResults from './SearchResults'
+import Prodcts, { Products } from './Products'
+
+export class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
@@ -18,40 +22,44 @@ class SearchBar extends Component {
     })
   }
 
+  handleSubmit = evt => {
+    evt.preventDefault()
+    const { products } = this.props
+    this.props.getSearchResults(this.state.query, products)
+  }
+
   render() {
+    return (
+      <div>
+        <input
+          placeholder="I'm looking for..."
+          onChange={this.handleInputChange}
+        />
+        <button onClick={this.handleSubmit}>Search</button>
+      </div>
+    )
+  }
+}
+
+const mapState = (state, ownProps) => ({
+  products: state.product.products
+})
+
+const mapDispatch = (dispatch, ownProps) => ({
+  getSearchResults: (query, products) => {
     const options = {
       shouldSort: true,
-      threshold: 0.6,
+      threshold: 0.3,
       location: 0,
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 1,
       keys: ['name', 'description']
     }
-    const { products, setProduct } = this.props
     const fuse = new Fuse(products, options)
-    const result = fuse.search(this.state.query)
-    history.push('/', {searchResults: results})
-    console.log('search result ', result)
-    return (
-      <div>
-        <input placeholder="I am looking for..." onChange={this.handleInputChange} />
-      </div>
-    )
-  }
-}
-
-const mapState = state => ({
-  products: state.product.products
-})
-
-const mapDispatch = (dispatch, ownProps) => ({
-  getProducts: dispatch(getProducts()),
-  setProduct: product => {
-    event.preventDefault()
-    dispatch(setProduct(product))
-    ownProps.history.push('/single-product')
+    const results = fuse.search(query)
+    ownProps.history.push('/search-results', { searchResults: results })
   }
 })
 
-export default connect(mapState, mapDispatch)(SearchBar)
+export default withRouter(connect(mapState, mapDispatch)(SearchBar))
