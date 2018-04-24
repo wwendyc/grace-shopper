@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {getProducts} from '../store/product'
 import {getCart, removeFromCart} from '../store/cart'
 
 const Cart = props => {
