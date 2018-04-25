@@ -1,3 +1,5 @@
+import { clearCart } from './cart'
+
 /**
  * ACTION TYPES
  */
@@ -78,7 +80,8 @@ export const addOrder = (order) => {
       }
 
       const { data } = await axios.post('/api/orders', order);
-      dispatch(add(data));
+      await dispatch(add(data));
+      await dispatch(clearCart())
 
       history.push(`/orders/${data.id}`)
     }

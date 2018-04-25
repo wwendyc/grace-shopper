@@ -21,6 +21,15 @@ router.post('/', (req, res, next) => {
   }
 })
 
+router.delete('/', (req, res, next) => {
+  try {
+    req.session.destroy()
+    res.sendStatus(204)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 router.delete('/:id', (req, res, next) => {
   try {
     const id = req.params.id
