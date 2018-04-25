@@ -28,15 +28,21 @@ export const removeFromCart = id => async (dispatch) => {
   dispatch(getCartAction(cart))
 }
 
+export const clearCart = () => async (dispatch) => {
+  const res = await axios.delete(`/api/cart/`)
+  const cart = {}
+  dispatch(getCartAction(cart))
+}
+
 const initialState = {
   cart: {}
 }
 
 export default (state = initialState, action) => {
-  switch(action.type) {
-  case GET_CART:
-    return {...state, cart: action.cart}
-  default:
-    return {...state}
+  switch (action.type) {
+    case GET_CART:
+      return {...state, cart: action.cart}
+    default:
+      return {...state}
   }
 }
