@@ -18,78 +18,57 @@ const Checkout = (props) => {
   });
 
   return (
-    <div>
-      <ul>
-        <li>Items:
-        {
-          cartList.map(product => {
-            return (
-              <div key={product.id}>
-                <img src={product.imgUrl} />
-                <ul>
-                  <li>
-                    <Link
-                      to='/single-product'
-                      onClick={() => setProduct(product)}
-                      >{product.name}
-                    </Link>
-                  </li>
-                  <li>${product.price.toFixed(2)}</li>
-                  <li>Quantity: {product.quantity}</li>
-                  <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
-                </ul>
-              </div>
-            )
-          })
-        }
-        </li>
-        <li>Total: {totalPrice}</li>
-      </ul>
-      <form onSubmit={onSubmit}>
-        <div>
+    <div className='OrderContainer'>
+      <div style={{alignSelf: 'center'}}>
+        <h3>Total: ${totalPrice}</h3>
+        <form onSubmit={onSubmit}>
           <label htmlFor='address'>Address:</label>
-          <input
-            type='text'
-            name='address'
-          />
-        </div>
-        <div>
+          <input type='text' name='address' />
+          <br />
+
           <label htmlFor='city'>City:</label>
-          <input
-            type='text'
-            name='city'
-          />
-        </div>
-        <div>
+          <input type='text' name='city' />
+          <br />
+
           <label htmlFor='state'>State:</label>
-          <input
-            type='text'
-            name='state'
-          />
-        </div>
-        <div>
+          <input type='text' name='state' />
+          <br />
+
           <label htmlFor='zipCode'>Zip Code:</label>
-          <input
-            type='text'
-            name='zipCode'
-          />
-        </div>
-        <div>
+          <input type='text' name='zipCode' />
+          <br />
+
           <label htmlFor='email'>Email:</label>
-          <input
-            type='text'
-            name='email'
-            defaultValue={user.email}
-          />
-        </div>
-        <div>
-          <button
-            type='submit'
-            disabled={(Object.keys(cart).length === 0) ? 'disabled' : ''}
-            >Submit
-          </button>
-        </div>
-      </form>
+          <input type='text' name='email' defaultValue={user.email} />
+          <br />
+
+          <button type='submit' disabled={(Object.keys(cart).length === 0) ? 'disabled' : ''}>Submit</button>
+        </form>
+      </div>
+
+      <div className='ProductsContainer'>
+      {
+        cartList.map(product => {
+          return (
+            <div key={product.id}>
+              <img src={product.imgUrl} />
+              <ul>
+                <li>
+                  <Link
+                    to='/single-product'
+                    onClick={() => setProduct(product)}
+                    >{product.name}
+                  </Link>
+                </li>
+                <li>${product.price.toFixed(2)}</li>
+                <li>Quantity: {product.quantity}</li>
+                <li>Subtotal: ${product.subtotal.toFixed(2)}</li>
+              </ul>
+            </div>
+          )
+        })
+      }
+      </div>
     </div>
   )
 }
