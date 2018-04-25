@@ -18,7 +18,34 @@ const Checkout = (props) => {
   });
 
   return (
-    <div className='CheckoutContainer'>
+    <div className='OrderContainer'>
+      <div style={{alignSelf: 'center'}}>
+        <h3>Total: ${totalPrice}</h3>
+        <form onSubmit={onSubmit}>
+          <label htmlFor='address'>Address:</label>
+          <input type='text' name='address' />
+          <br />
+
+          <label htmlFor='city'>City:</label>
+          <input type='text' name='city' />
+          <br />
+
+          <label htmlFor='state'>State:</label>
+          <input type='text' name='state' />
+          <br />
+
+          <label htmlFor='zipCode'>Zip Code:</label>
+          <input type='text' name='zipCode' />
+          <br />
+
+          <label htmlFor='email'>Email:</label>
+          <input type='text' name='email' defaultValue={user.email} />
+          <br />
+
+          <button type='submit' disabled={(Object.keys(cart).length === 0) ? 'disabled' : ''}>Submit</button>
+        </form>
+      </div>
+
       <div className='ProductsContainer'>
       {
         cartList.map(product => {
@@ -41,52 +68,6 @@ const Checkout = (props) => {
           )
         })
       }
-      </div>
-      <div>
-      <h3>Total: ${totalPrice}</h3>
-        <form onSubmit={onSubmit}>
-          <label htmlFor='address'>Address:</label>
-          <br />
-          <input
-            type='text'
-            name='address'
-          />
-          <br />
-          <label htmlFor='city'>City:</label>
-          <br />
-          <input
-            type='text'
-            name='city'
-          />
-          <br />
-          <label htmlFor='state'>State:</label>
-          <br />
-          <input
-            type='text'
-            name='state'
-          />
-          <br />
-          <label htmlFor='zipCode'>Zip Code:</label>
-          <br />
-          <input
-            type='text'
-            name='zipCode'
-          />
-          <br />
-          <label htmlFor='email'>Email:</label>
-          <br />
-          <input
-            type='text'
-            name='email'
-            defaultValue={user.email}
-          />
-          <br />
-          <button
-            type='submit'
-            disabled={(Object.keys(cart).length === 0) ? 'disabled' : ''}
-            >Submit
-          </button>
-        </form>
       </div>
     </div>
   )

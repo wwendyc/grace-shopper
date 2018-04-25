@@ -56,12 +56,6 @@ nav a:first-child:hover {
   flex-wrap: wrap;
 }
 
-.CheckoutContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
 #SingleProductContainer {
   display: flex;
   flex-direction: column;

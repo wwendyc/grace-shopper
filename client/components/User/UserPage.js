@@ -18,7 +18,7 @@ class UserPage extends Component {
     const { id, name, email, orders } = this.props.targetUser
     const user = this.props.user
     return (
-      <div>
+      <div style={{display: 'flex'}}>
           <div>
             <UserInfo targetUser={this.props.targetUser} />
             <Switch>
