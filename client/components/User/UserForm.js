@@ -41,7 +41,6 @@ export class UserForm extends Component {
     const { id, name, email } = this.props.targetUser
     const { isAdmin } = this.props.user
     const password = ''
-    console.log(this.state.isAdmin)
     // TODO: add validataion
     return (
       <div className="userForm">
@@ -73,7 +72,7 @@ export class UserForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          {isAdmin || !isAdmin ? (
+          {isAdmin ? (
             <div>
               <p>Admin status: </p>
               <label htmlFor="admin">
@@ -106,8 +105,11 @@ export class UserForm extends Component {
   }
 }
 
-const mapDispatch = dispatch => ({
-  editUser: (userId, user) => dispatch(updateUser(userId, user))
+const mapDispatch = (dispatch, ownProps) => ({
+  editUser: async (userId, user) => {
+    await dispatch(updateUser(userId, user))
+    ownProps.history.push(`/user/${userId}`)
+  }
 })
 
 export default connect(null, mapDispatch)(UserForm)

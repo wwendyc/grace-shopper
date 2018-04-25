@@ -6,7 +6,8 @@ import { getCart, addToCart } from  '../store/cart'
 
 
 export const Products = (props) => {
-  const {setProduct, addToCart, avgReviews} = props
+  const {setProduct, addToCart} = props
+  const avgReviews = props.avgReviews
   let products = props.products
   if (props.location.state) products = props.location.state.searchResults
 

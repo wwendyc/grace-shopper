@@ -4,7 +4,7 @@ const { adminsOnly, authUser } = require('./gatekeeping')
 module.exports = router
 
 // GET /api/users
-router.get('/', adminsOnly, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll()
     res.json(users)
@@ -13,7 +13,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.get('/:id', authUser, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const singleUser = await User.findOne({
       include: [{ model: Order }, { model: Review }],
@@ -25,7 +25,7 @@ router.get('/:id', authUser, async (req, res, next) => {
   }
 })
 
-router.get('/:id/orders', authUser, async (req, res, next) => {
+router.get('/:id/orders', async (req, res, next) => {
   try {
     const userOrders = await User.findOne({
       include: [{ model: Order }],
@@ -37,7 +37,7 @@ router.get('/:id/orders', authUser, async (req, res, next) => {
   }
 })
 
-router.get('/:id/reviews', authUser, async (req, res, next) => {
+router.get('/:id/reviews', async (req, res, next) => {
   try {
     const userReviews = await User.findOne({
       include: [{ model: Review }],
@@ -72,7 +72,7 @@ router.get('/admin', adminsOnly, async (req, res, next) => {
 })
 
 // Create user
-router.post('/', adminsOnly, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
     res.status(201).json(newUser)
@@ -82,7 +82,7 @@ router.post('/', adminsOnly, async (req, res, next) => {
 })
 
 // Update user
-router.put('/:id', adminsOnly, async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const targetUser = await User.findOne({
       where: { id: req.params.id }

@@ -19,6 +19,7 @@ export class UserPage extends Component {
     const user = this.props.user
     return (
       <div style={{display: 'flex'}}>
+        {user.id === id || user.isAdmin ? (
           <div>
             <UserInfo targetUser={this.props.targetUser} />
             <Switch>
@@ -32,10 +33,9 @@ export class UserPage extends Component {
               />
             </Switch>
           </div>
-        {/* {user.id === id || user.isAdmin ? (
         ) : (
           <h5>Please login to view this page</h5>
-        )} */}
+        )}
       </div>
     )
   }

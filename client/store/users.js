@@ -53,7 +53,6 @@ export const createUser = user => {
 
 export const updateUser = (userId, user) => {
   return async (dispatch, _, {axios}) => {
-    console.log('in store ', userId, user)
     const updatedUser = await axios.put(`/api/users/${userId}`, user)
       .catch(err => console.log('Unable to update user'))
     dispatch(editUser(updatedUser.data))
