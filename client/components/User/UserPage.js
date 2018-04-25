@@ -18,7 +18,7 @@ export class UserPage extends Component {
     const { id, name, email, orders } = this.props.targetUser
     const user = this.props.user
     return (
-      <div>
+      <div style={{display: 'flex'}}>
         {user.id === id || user.isAdmin ? (
           <div>
             <UserInfo targetUser={this.props.targetUser} />
