@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { updateUser } from '../../store/users'
+import { updateUser, getSingleUser } from '../../store/users'
 
 export class UserForm extends Component {
   constructor() {
@@ -108,6 +108,7 @@ export class UserForm extends Component {
 const mapDispatch = (dispatch, ownProps) => ({
   editUser: async (userId, user) => {
     await dispatch(updateUser(userId, user))
+    await dispatch(getSingleUser(userId))
     ownProps.history.push(`/user/${userId}`)
   }
 })
