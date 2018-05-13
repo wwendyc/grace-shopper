@@ -27,6 +27,7 @@
     "fuse": "^0.4.0",
     "fuse.js": "^3.2.0",
     "history": "^4.7.2",
+    "material-ui": "^0.20.0",
     "moment": "^2.22.1",
     "morgan": "^1.9.0",
     "normalizr": "^3.2.4",
