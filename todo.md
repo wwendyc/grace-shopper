@@ -1,6 +1,4 @@
-* Implement add to cart - store session(cookie) - create cart component
-
-* Sign up 
+* Sign up
 
 * Home link sends back to products page
 

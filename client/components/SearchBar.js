@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import { getProducts, setProduct } from '../store/product'
-
 import SearchResults from './SearchResults'
 import Prodcts, { Products } from './Products'
 
@@ -26,16 +25,21 @@ export class SearchBar extends Component {
     evt.preventDefault()
     const { products } = this.props
     this.props.getSearchResults(this.state.query, products)
+    this.setState({
+      query: ''
+    })
   }
 
   render() {
     return (
       <div>
-        <input
-          placeholder="I'm looking for..."
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.handleSubmit}>Search</button>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            placeholder="I'm looking for..."
+            value={this.state.query}
+            onChange={this.handleInputChange}
+          />
+        </form>
       </div>
     )
   }

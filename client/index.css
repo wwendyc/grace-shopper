@@ -42,7 +42,60 @@ nav a:first-child:hover {
 
 #ComponentContainer {
   height: 100%;
-  width: 100%
+  width: 100%;
+}
+
+.main {
+  background: #ffffff;
+  position: relative;
+  z-index: 3;
+}
+
+.main-raised {
+  margin: -60px 30px 0px;
+  border-radius: 6px;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.section {
+  padding: 70px 0;
+}
+
+.presentation-page .section-cards .col-md-4,
+.index-page .section-cards .col-md-4 {
+  perspective: 800px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-background,
+.back-background {
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+}
+
+.card-raised {
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+    0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .OrderContainer {
@@ -54,6 +107,16 @@ nav a:first-child:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.singleProd {
+  max-width: 400px;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 #SingleProductContainer {
@@ -64,11 +127,26 @@ nav a:first-child:hover {
 
 img {
   height: 300px;
-  width: 300px;
+  /* width: 300px; */
 }
 
-.mainli {
-  width: 300px;
+.center {
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+}
+
+.sideMargins {
+  margin-right: 2%;
+  padding-top: 5%;
+}
+
+.bottomMargins {
+  margin-bottom: 10%;
+}
+
+.productUL li {
+  list-style: none;
 }
 
 .ImgContainer {
@@ -81,6 +159,10 @@ img {
   cursor: pointer;
   margin: 50px;
   margin-top: 0px;
+}
+
+.ProductContainer li {
+  list-style: none;
 }
 
 button {
