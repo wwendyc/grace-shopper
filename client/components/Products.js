@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { getProducts, setProduct } from '../store/product'
-import { getCart, addToCart } from '../store/cart'
-
+import StarRatingComponent from 'react-star-rating-component'
 import {
   Card,
   CardActions,
@@ -14,8 +12,14 @@ import {
 } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const titleTextStyle = {
-  margin: 0
+import { getProducts, setProduct } from '../store/product'
+import { getCart, addToCart } from '../store/cart'
+
+const style = {
+  titleTextStyle: {
+    fontWeight: 'bold',
+    fontSize: '18px'
+  }
 }
 
 export const Products = props => {
@@ -25,26 +29,32 @@ export const Products = props => {
   if (props.location.state) products = props.location.state.searchResults
 
   return (
-    <div className="ProductsContainer">
+    <div className="products-container">
       {products.map(product => {
         return (
           <div
-            className="singleProd"
+            className="col-md-4"
             key={product.id}
             onClick={() => setProduct(product)}
           >
-            <Card className="card">
+            <Card className="card card-raised">
               <CardMedia className="ImgContainer">
                 <img src={product.imgUrl} />
               </CardMedia>
-              <CardTitle className="center" title={product.name} style={titleTextStyle} />
-              <CardText style={titleTextStyle} >
-                <ul className="productUL">
-                  <li>Price: ${product.price}</li>
-                  <li>Quantity in stock: {product.inventoryQuantity}</li>
-                  <li>
-                    Average Rating:{' '}
-                    {avgReviews.find(avgReview => {
+              <CardTitle
+                className="center"
+                title={product.name}
+                titleStyle={style.titleTextStyle}
+              />
+              <div className="center">
+                <StarRatingComponent
+                  className="center"
+                  name="productRating"
+                  editing={false}
+                  renderStarIcon={() => <span>✮</span>}
+                  starCount={5}
+                  value={
+                    avgReviews.find(avgReview => {
                       return avgReview.id === product.id
                     }).avgRating
                       ? Math.ceil(
@@ -52,18 +62,25 @@ export const Products = props => {
                             return avgReview.id === product.id
                           }).avgRating * Math.pow(10, 2)
                         ) / Math.pow(10, 2)
-                      : 'Not yet rated'}
-                  </li>
+                      : 'Not yet rated'
+                  }
+                />
+              </div>
+              <CardText>
+                <ul className="productUL">
+                  <li>Price: ${product.price}</li>
+                  <li>Quantity in stock: {product.inventoryQuantity}</li>
                   <li className="sideMargins">{product.description}</li>
                 </ul>
               </CardText>
               <div className="center bottomMargins">
-                <RaisedButton
+                <button
+                  className="btn btn-rose btn-round"
                   id={product.id}
-                  label="Add To Cart"
-                  primary={true}
                   onClick={event => addToCart(event)}
-                />
+                >
+                  Product Details
+                </button>
               </div>
             </Card>
           </div>

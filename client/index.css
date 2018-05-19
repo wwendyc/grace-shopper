@@ -45,7 +45,7 @@ nav a:first-child:hover {
   width: 100%;
 }
 
-.main {
+/* .main {
   background: #ffffff;
   position: relative;
   z-index: 3;
@@ -60,9 +60,9 @@ nav a:first-child:hover {
 
 .section {
   padding: 70px 0;
-}
+} */
 
-.presentation-page .section-cards .col-md-4,
+/* .presentation-page .section-cards .col-md-4,
 .index-page .section-cards .col-md-4 {
   perspective: 800px;
 }
@@ -72,9 +72,9 @@ nav a:first-child:hover {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-}
+} */
 
-.card {
+/* .card {
   display: inline-block;
   position: relative;
   width: 100%;
@@ -96,14 +96,14 @@ nav a:first-child:hover {
 .card-raised {
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
     0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .OrderContainer {
   display: flex;
   flex-direction: column;
 }
 
-.ProductsContainer {
+.products-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -117,6 +117,10 @@ nav a:first-child:hover {
   max-width: 400px;
   margin-left: 1%;
   margin-right: 1%;
+}
+
+.product-review {
+  font-weight: bold;
 }
 
 #SingleProductContainer {
